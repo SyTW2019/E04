@@ -1,6 +1,6 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 let User = new Schema({
     email: {
@@ -9,7 +9,9 @@ let User = new Schema({
     password: {
         type: String
     }
-})
+});
+
 
 // No sé porqué los imports y exports fallan
-// export default mongoose.model('User', User);
+export default mongoose.model('User', User);
+// module.exports = User

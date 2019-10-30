@@ -1,9 +1,10 @@
-var cors =  require('cors');
-var bodyParser = require('body-parser');
-var mongooose = require('mongoose'); 
-var express = require('express');
-var User = require('./models/User')
-var runInNewContext = require('vm');
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import mongooose from 'mongoose'
+import express from 'express'
+import User from './models/User'
+import runInNewContext from 'vm'
+
 
 
 const app = express();
@@ -12,7 +13,7 @@ const router = express.Router();
 app.use(cors())
 app.use(bodyParser.json());
 
-mongooose.connect('mongodb://localhost:27017//users');
+mongooose.connect('mongodb://localhost:27017/users');
 
 const connection = mongooose.connection;
 
@@ -38,7 +39,7 @@ router.route('/users/:id').get((req, res) => {
     });
 });
 
-router.route('/issue/add').post((req, res) => {
+router.route('/users/add').post((req, res) => {
     let user = new User(req.body);
     user.save()
     .then(user => {
