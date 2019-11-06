@@ -6,3 +6,10 @@
 .field-full-width {
     width: 100%;
 }
+
+
+.register-form {
+    width: 70%;
+    align-content: center;
+    margin: 0 auto;
+}

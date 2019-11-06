@@ -13,12 +13,12 @@ import { AppComponent } from './app.component';
 import { UserService } from './user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListComponent } from './components/list/list.component';
-import { CreateComponent } from './components/create/create.component';
-import { EditComponent } from './components/edit/edit.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: 'create', component: CreateComponent},
-  { path: 'edit/:id', component: EditComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent},
   { path: 'list', component: ListComponent},
   { path: '', redirectTo: 'list', pathMatch: 'full'}
 ];
@@ -27,8 +27,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ListComponent,
-    CreateComponent,
-    EditComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

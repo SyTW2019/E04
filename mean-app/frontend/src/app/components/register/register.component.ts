@@ -6,24 +6,24 @@ import { UserService } from '../../user.service';
 
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class CreateComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
-  createForm: FormGroup;
+  registerForm: FormGroup;
 
   constructor(private userService: UserService, private fb: FormBuilder, private router: Router) { 
-    this.createForm = this.fb.group({
+    this.registerForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     })
   }
 
-  addUser(email, password) {
-    this.userService.addUser(email, password).subscribe(() => {
-      this.router.navigate(['/list']);
+  registerUser(email, password) {
+    this.userService.registerUser(email, password).subscribe(() => {
+      this.router.navigate(['/login']);
     });
   }
 
