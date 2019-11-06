@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 
 let User = new Schema({
     email: {
-        type: String
+        type: String, unique: true, required: true, dropDups: true 
     },
     password: {
         type: String
+    },
+    nickname: {
+        type: String, unique: true, required: true, dropDups: true 
     }
 });
 
-
-// No sé porqué los imports y exports fallan
 export default mongoose.model('User', User);
-// module.exports = User

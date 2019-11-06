@@ -17,14 +17,19 @@ export class RegisterComponent implements OnInit {
   constructor(private userService: UserService, private fb: FormBuilder, private router: Router) { 
     this.registerForm = this.fb.group({
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      nickname: ['', Validators.required]
     })
   }
 
-  registerUser(email, password) {
-    this.userService.registerUser(email, password).subscribe(() => {
+  onSubmit() {
+    this.userService.registerUser(this.registerForm.value).subscribe(() => {
       this.router.navigate(['/login']);
     });
+  }
+
+  registerUser(email, password, nickname) {
+
   }
 
   ngOnInit() {

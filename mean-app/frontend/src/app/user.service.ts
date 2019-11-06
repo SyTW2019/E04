@@ -22,18 +22,15 @@ export class UserService {
     return this.http.get(`${this.uri}/users/${id}`);
   }
 
-  registerUser(email, password){
-    const user = {
-      email: email,
-      password: password
-    };
-    return this.http.post(`${this.uri}/users/add`, user);
+  registerUser(user){
+    return this.http.post(`${this.uri}/users/register`, user);
   }
 
-  updateUser(id, email, password){
+  updateUser(id, email, password, nickname){
     const user = {
       email: email,
-      password: password
+      password: password,
+      nickname
     };
     return this.http.post(`${this.uri}/users/update/${id}`, user);
   }

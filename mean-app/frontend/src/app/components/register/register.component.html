@@ -10,21 +10,30 @@
         </mat-card-header>  
         <mat-divider></mat-divider>
         <br>
-        <form [formGroup]="createForm" class="create-form">
+        <form [formGroup]="registerForm" class="register-form">
+            <mat-form-field class="field-full-width">
+                <input matInput placeholder="name" #name>
+            </mat-form-field>
+            <mat-form-field class="field-full-width">
+                <input matInput placeholder="surname"  #surname>
+            </mat-form-field>
             <mat-form-field class="field-full-width">
                 <input matInput placeholder="email" formControlName="email" #email>
             </mat-form-field>
             <mat-form-field class="field-full-width">
-                    <input matInput placeholder="nickname" formControlName="nickname" #email>
+                    <input matInput placeholder="nickname" formControlName="nickname" #nickname>
                 </mat-form-field>
             <mat-form-field class="field-full-width">
                 <input matInput placeholder="password" formControlName="password" #password>
             </mat-form-field>
             <mat-form-field class="field-full-width">
-                    <input matInput placeholder="repeat password" formControlName="repeat-password" #password>
-                </mat-form-field>
+                <mat-label>birthdate</mat-label>
+                <input matInput [matDatepicker]="birthdate" placeholder="birthdate">
+                <mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle>
+                <mat-datepicker #birthdate></mat-datepicker>
+            </mat-form-field>
             <br><br>
-            <button type="submit" (click)="registerUser(email.value, password.value, repeat-password.value, nickname.value)" mat-raised-button color="primary">Register</button>
+            <button type="submit" mat-raised-button color="primary">Register</button>
         </form>
     </mat-card>
 </div>

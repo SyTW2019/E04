@@ -13,7 +13,7 @@ import { UserService } from '../../user.service';
 export class ListComponent implements OnInit {
 
   users: User[];
-  displayedColumns = ['email', 'password'];
+  displayedColumns = ['email', 'password', 'nickname'];
 
   constructor(private userService: UserService, private router: Router) { }
 

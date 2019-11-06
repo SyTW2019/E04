@@ -5,3 +5,7 @@ table {
 .mat-column-right {
     text-align: center;
 }
+
+.function-button {
+    margin-left: 5em;
+}

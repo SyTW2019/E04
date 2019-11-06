@@ -17,8 +17,8 @@
                 <input matInput placeholder="password" formControlName="password" #password>
             </mat-form-field>
             <br><br>
-            <button mat-raised-button color="primary" routerLink="/register"> Register </button>
-            <button type="submit" (click)="checkUser(email.value, password.value)" mat-raised-button color="primary">Login</button>
+            <button type="submit" class="function-button" (click)="checkUser(email.value, password.value)" mat-raised-button color="primary">Login</button>
+            <button mat-raised-button class="function-button" routerLink="/register"> Register </button>
         </form>
         <div class="alert" *ngIf="serverErrorMessages">
             {{serverErrorMessages}}
