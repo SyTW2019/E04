@@ -22,14 +22,10 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  onSubmit() {
-    this.userService.registerUser(this.registerForm.value).subscribe(() => {
+  registerUser(email, password, nickname) {
+    this.userService.registerUser(email, password, nickname).subscribe(() => {
       this.router.navigate(['/login']);
     });
-  }
-
-  registerUser(email, password, nickname) {
-
   }
 
   ngOnInit() {

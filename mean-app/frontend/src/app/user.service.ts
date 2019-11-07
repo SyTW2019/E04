@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UserService {
 
-  uri = 'http://localhost:4000';
+  uri = 'http://localhost:27017';
 
   constructor(private http: HttpClient) { }
 
@@ -22,8 +22,13 @@ export class UserService {
     return this.http.get(`${this.uri}/users/${id}`);
   }
 
-  registerUser(user){
-    return this.http.post(`${this.uri}/users/register`, user);
+  registerUser(email, password, nickname){
+    const user = {
+      email: email,
+      password: password,
+      nickname
+    };
+    return this.http.post(`${this.uri}/users/add`, user);
   }
 
   updateUser(id, email, password, nickname){

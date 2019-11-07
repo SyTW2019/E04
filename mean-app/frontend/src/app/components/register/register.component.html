@@ -21,8 +21,8 @@
                 <input matInput placeholder="email" formControlName="email" #email>
             </mat-form-field>
             <mat-form-field class="field-full-width">
-                    <input matInput placeholder="nickname" formControlName="nickname" #nickname>
-                </mat-form-field>
+                <input matInput placeholder="nickname" formControlName="nickname" #nickname>
+            </mat-form-field>
             <mat-form-field class="field-full-width">
                 <input matInput placeholder="password" formControlName="password" #password>
             </mat-form-field>
@@ -32,8 +32,15 @@
                 <mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle>
                 <mat-datepicker #birthdate></mat-datepicker>
             </mat-form-field>
+            <mat-form-field class="field-full-width">
+                <textarea matInput placeholder="description"
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="7"
+                #description></textarea>
+            </mat-form-field>
             <br><br>
-            <button type="submit" mat-raised-button color="primary">Register</button>
+            <button type="submit" mat-raised-button color="accent" (click)="registerUser(email.value, password.value, nickname.value)">Register</button>
         </form>
     </mat-card>
 </div>
