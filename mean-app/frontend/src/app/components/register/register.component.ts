@@ -22,9 +22,9 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  registerUser(email, password, nickname) {
-    this.userService.registerUser(email, password, nickname).subscribe(() => {
-      this.router.navigate(['/login']);
+  registerUser(email, password, nickname, name, surname, birthdate, description) {
+    this.userService.registerUser(email, password, nickname, name, surname, birthdate, description).subscribe(() => {
+      this.router.navigate(['/list']);
     });
   }
 

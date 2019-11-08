@@ -30,7 +30,7 @@
                 <mat-label>birthdate</mat-label>
                 <input matInput [matDatepicker]="birthdate" placeholder="birthdate">
                 <mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle>
-                <mat-datepicker #birthdate></mat-datepicker>
+                <mat-datepicker #birthdate disabled="true"></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="field-full-width">
                 <textarea matInput placeholder="description"
@@ -40,7 +40,7 @@
                 #description></textarea>
             </mat-form-field>
             <br><br>
-            <button type="submit" mat-raised-button color="accent" (click)="registerUser(email.value, password.value, nickname.value)">Register</button>
+            <button type="submit" mat-raised-button color="accent" (click)="registerUser(email.value, password.value, nickname.value, name.value, surname.value, birthdate.value, description.value)">Register</button>
         </form>
     </mat-card>
 </div>

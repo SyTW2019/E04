@@ -1,0 +1,55 @@
+Usuario "Influencer"
+---------------------
+Nombre: String
+Apellidos: String
+Nickname: String Unique
+Email: String Unique
+Password: String
+Fecha de nacimiento: Date
+Sexo: Char
+Descripción: String
+Apoyos: Producto[]
+
+ver OAUTH -->
+Facebook: String
+Instagram: String
+Twitter: String
+Google: String
+
+
+Administrador de Marketing
+---------------------------
+Nombre: String
+Apellidos: String
+Nickname: String unique
+Password: String
+Fecha de nacimiento: Date
+Sexo: Char
+Descripción: String
+Empresa: String
+Productos: Producto[]
+
+
+Producto
+--------------------------
+Título: String
+Descripción: String
+Campos_de_interes: String[]
+Código: int
+Administrador: String
+Apoyo: Influencers[]
+
+
+Pagos
+------------------
+Cantidad: Double
+Concepto: String
+Emisor: Usuario
+Receptor: Usuario
+Código de Pago: Int unique autogenerado
+
+
+Estadísticas
+--------------------
+
+
