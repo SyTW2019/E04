@@ -1,0 +1,57 @@
+User "Influencer"
+---------------------
+Username: String Unique
+Password: String
+Email: String Unique
+Birthday: Date
+Type_Promotion: String
+Sexo: Char
+Name: String
+Account_number: Int
+Phone_Contact: Int
+
+ver OAUTH -->
+Facebook: String
+Instagram: String
+Twitter: String
+Google: String
+Alternative_social_web: String
+
+
+Enterprise
+---------------------------
+Username: String Unique
+Password: String
+Email: String Unique
+Birthday: Date
+Sexo: Char
+Name: String
+Product_Promotion: String
+Phone_Contact: Int
+
+Product
+--------------------------
+Código_Product: String Unique
+Product_Name: String
+Category: String
+Description: String
+ID_Enterprise: String
+ID_Influencers: Influencers[]
+
+
+Pay
+------------------
+Method: String
+Quantity: Double
+Beneficiary (Username.Influencer) : Username
+Transmitter (Username.Enterprise) : Username
+Account_Number_Influencer: Int
+
+
+Statistics
+------------------
+Id_User (Username.Influencer) : String
+Quantity_Product_Sold: Int
+Prestige_Level (1-5) : Double
+Contracts_Number: Int
+Link_Views: Int
