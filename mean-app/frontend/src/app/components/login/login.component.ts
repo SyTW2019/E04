@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
     })
    }
 
-  checkUser(loginForm : NgForm) {
-    this.userService.checkUser(loginForm.value).subscribe(
+  login(email: String, password: String) {
+    this.userService.checkUser(email, password).subscribe(
       res => {
-        this.userService.setToken(res['token']);
+        this.userService.initSession(res['user']);
         this.router.navigateByUrl('/home');
     },
     err => {

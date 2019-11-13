@@ -76,5 +76,16 @@ router.route('/users/delete/:id').get((req, res) => {
     });
 });
 
+router.route('/users/login/:email').post((req, res) => {
+    user.findOne({_email: req.params.email}, (err, user) => {
+        if(err)
+            res.json(err);
+        if(!user)
+            res.json("no user");
+        if(user.password == password)
+            res['user'] = user;
+    })
+})
+
 app.use('/', router);
 app.listen(4000, () => console.log('Express server running on port 4000'));

@@ -39,8 +39,17 @@
                 cdkAutosizeMaxRows="7"
                 #description></textarea>
             </mat-form-field>
+            <mat-form-field class="field-full-width">
+                <input matInput placeholder="instagram" formControlName="instagram" #instagram>
+            </mat-form-field>
+            <mat-form-field class="field-full-width">
+                <input matInput placeholder="facebook" formControlName="facebook" #facebook>
+            </mat-form-field>
+            <mat-form-field class="field-full-width">
+                <input matInput placeholder="twitter" formControlName="twitter" #twitter>
+            </mat-form-field>
             <br><br>
-            <button type="submit" mat-raised-button color="accent" (click)="registerUser(email.value, password.value, nickname.value, name.value, surname.value, birthdate.value, description.value)">Register</button>
+            <button type="submit" mat-raised-button color="accent" (click)="registerUser(email.value, password.value, nickname.value, name.value, surname.value, birthdate.value, description.value, instagram.value, facebook.value, twitter.value)">Register</button>
         </form>
     </mat-card>
 </div>

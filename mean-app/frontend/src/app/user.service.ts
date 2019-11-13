@@ -5,6 +5,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class UserService {
 
   uri = 'http://localhost:4000';
@@ -22,7 +25,7 @@ export class UserService {
     return this.http.get(`${this.uri}/users/${id}`);
   }
 
-  registerUser(email, password, nickname, name, surname, birthdate, description){
+  registerUser(email, password, nickname, name, surname, birthdate, description, instagram, facebook, twitter){
     const user = {
       email: email,
       password: password,
@@ -30,7 +33,10 @@ export class UserService {
       name: name,
       surname: surname,
       birthdate: birthdate,
-      description: description
+      description: description,
+      instagram: instagram,
+      facebook: facebook,
+      twitter: twitter
     };
     return this.http.post(`${this.uri}/users/add`, user);
   }
@@ -39,7 +45,7 @@ export class UserService {
     const user = {
       email: email,
       password: password,
-      nickname
+      nickname: nickname
     };
     return this.http.post(`${this.uri}/users/update/${id}`, user);
   }
@@ -48,13 +54,16 @@ export class UserService {
     return this.http.get(`${this.uri}/users/delete/${email}`)
   }
 
-  checkUser(authCredentials){
+  checkUser(email, password){
     // This function check the user for login
-    return this.http.post(/*environment.apiBaseUrl +*/ '/authenticate', authCredentials,this.noAuthHeader);
-
+    const user = {
+      email: email,
+      password: password
+    }
+    return this.http.post(`${this.uri}/users/login/${email}`, user);
   }
 
-  setToken(token: string){
-    localStorage.setItem('token', token);
+  initSession(user: string){
+    sessionStorage.setItem('user', user);
   }
 }

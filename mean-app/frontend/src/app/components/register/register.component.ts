@@ -10,6 +10,11 @@ import { UserService } from '../../user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
+/*
+
+*/
+
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
@@ -22,8 +27,8 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  registerUser(email, password, nickname, name, surname, birthdate, description) {
-    this.userService.registerUser(email, password, nickname, name, surname, birthdate, description).subscribe(() => {
+  registerUser(email, password, nickname, name, surname, birthdate, description, instagram, facebook, twitter) {
+    this.userService.registerUser(email, password, nickname, name, surname, birthdate, description, instagram, facebook, twitter).subscribe(() => {
       this.router.navigate(['/list']);
     });
   }

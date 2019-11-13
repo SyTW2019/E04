@@ -30,6 +30,15 @@ let User = new Schema({
     },
     description: {
         type: String
+    }, 
+    instagram: {
+        type: String
+    },
+    facebook: {
+        type: String
+    },
+    twitter: {
+        type: String
     }
 });
 User.plugin(uniqueValidator)
