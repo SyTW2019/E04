@@ -1,16 +1,3 @@
-export interface User {
-    email:String;
-    password:String;
-    nickname:String;
-    name:String;
-    surname:String;
-    birthdate: Date;
-    description:String;
-    instagram:String;
-    facebook:String;
-    twitter:String;
-}
-
 export class User {
     email:String;
     password:String;
@@ -24,7 +11,7 @@ export class User {
     twitter:String;
     sex:String;
     phone:Int16Array;
-  
+  /*
     constructor(email:String, password:String, nickname:String, name:String, surname:String, birthdate: Date, description:String, instagram:String, facebook:String, twitter:String, sex:String, phone: Int16Array){
       this.email = email;
       this.password = password;
@@ -39,4 +26,5 @@ export class User {
       this.sex = sex;
       this.phone = phone;
     }
-  }
+    */
+}
