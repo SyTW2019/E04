@@ -1,0 +1,3 @@
+[submodule "angular-auth-ngrx"]
+	path = angular-auth-ngrx
+	url = https://github.com/mjhea0/angular-auth-ngrx.git
