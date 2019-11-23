@@ -1,31 +1,29 @@
 export interface User {
-    email:String;
-    password:String;
-    nickname:String;
-    name:String;
-    surname:String;
+    email:string;
+    password:string;
+    nickname:string;
+    name:string;
+    surname:string;
     birthdate: Date;
-    description:String;
-    instagram:String;
-    facebook:String;
-    twitter:String;
+    description:string;
+    instagram:string;
+    facebook:string;
+    twitter:string;
 }
 
 export class User {
-    email:String;
-    password:String;
-    nickname:String;
-    name:String;
-    surname:String;
+    email:string;
+    password:string;
+    nickname:string;
+    name:string;
+    surname:string;
     birthdate: Date;
-    description:String;
-    instagram:String;
-    facebook:String;
-    twitter:String;
-    sex:String;
-    phone:Int16Array;
+    description:string;
+    instagram:string;
+    facebook:string;
+    twitter:string;
   
-    constructor(email:String, password:String, nickname:String, name:String, surname:String, birthdate: Date, description:String, instagram:String, facebook:String, twitter:String, sex:String, phone: Int16Array){
+    constructor(email:string, password:string, nickname:string, name:string, surname:string, birthdate: Date, description:string, instagram:string, facebook:string, twitter:string){
       this.email = email;
       this.password = password;
       this.nickname = nickname;
@@ -36,7 +34,5 @@ export class User {
       this.instagram = instagram;
       this.facebook = facebook;
       this.twitter = twitter;
-      this.sex = sex;
-      this.phone = phone;
     }
   }

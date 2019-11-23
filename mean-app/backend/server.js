@@ -1,91 +1,129 @@
-import cors from 'cors'
-import bodyParser from 'body-parser'
-import mongooose from 'mongoose'
-import express from 'express'
-import User from './models/User'
-import runInNewContext from 'vm'
-
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+import mongooose from 'mongoose';
+import User from './models/User';
 
 
 const app = express();
+
 const router = express.Router();
 
-app.use(cors())
-app.use(bodyParser.json());
 
 mongooose.connect('mongodb://localhost:27017/users');
-
 const connection = mongooose.connection;
-
 connection.once('open', () => {
-    console.log('MongoDB database connecion established successfully!');
+  console.log('MongoDB database connecion established successfully!');
 })
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(cors());
+
+app.get('/ping', (req, res, next) => {
+  res.status(200).json('pong!');
+});
+
+app.post('/register', (req, res, next) => {
+  console.log(req.body);
+  let user = new User(req.body);
+  user.nickname = "hola mundo3435dddw2ghghfff3135";
+  console.log(user);
+  user.save()
+  .then(user => {
+    jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
+      if (err) { console.log(err) }
+      console.log(token);
+      res.status(200).json({
+        status: 'success',
+        user : {
+          email: user.email
+        },
+        token: token,
+        errorMessage: null
+      })
+    });
+  })
+  .catch(err => {
+    console.log(err)
+      res.status(400).send('Failed to create new user');
+  });
+});
+
+router.route('/login').post((req, res, next) => {
+  console.log('hola');
+  const { body } = req;
+  const { email } = body;
+  const { password } = body;
+  console.log(email);
+  console.log(password);
+  User.findOne({ email: email }, (err, user) => {
+    console.log(user);
+
+    if (err) {
+      console.log(err);
+      res.status(422).json({
+        status: 'error',
+        errorMessage: err
+      })
+    }
+    if (!user) {
+      res.status(422).json({
+        status: 'error',
+        errorMessage: err
+      })
+    } else {
+      //checking to make sure the user entered the correct username/password combo
+      if (email === user.email && password === user.password) {
+        //if user log in success, generate a JWT token for the user with a secret key
+        jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
+          if (err) { console.log(err) }
+          console.log(token);
+          res.status(201).json({
+            status: 'success',
+            user : {
+              email: email
+            },
+            token: token,
+            errorMessage: null
+          })
+        });
+      } else {
+        res.status(422).json({
+          status: 'error',
+          errorMessage: 'not matching user and password'
+        })
+      }
+    }
+  })
+});
+
+//Check to make sure header is not undefined, if so, return Forbidden (403)
+const checkToken = (req, res, next) => {
+  const header = req.headers['authorization'];
+
+  if(typeof header !== 'undefined') {
+      const bearer = header.split(' ');
+      const token = bearer[1];
+
+      req.token = token;
+      next();
+  } else {
+      //If header is undefined return Forbidden (403)
+      res.sendStatus(403)
+  }
+}
 
 router.route('/users').get((req, res) => {
-    User.find((err, users) => {
-        if (err)
-            console.log(err);
-        else
-            res.json(users);
-    });
+  User.find((err, users) => {
+    if (err)
+      console.log(err);
+    else
+      res.json(users);
+  });
 });
 
-router.route('/users/:id').get((req, res) => {
-    User.findById(req.params.id, (err, user) => {
-        if(err)
-            console.log(err);
-        else
-            res.json(user);
-    });
-});
-
-router.route('/users/add').post((req, res) => {
-    let user = new User(req.body);
-    user.save()
-    .then(user => {
-        res.status(200).json({'user': 'Added successfully'})
-    })
-    .catch(err => {
-        res.status(400).send('Failed to create new user');
-    });
-});
-
-router.route('/users/update/:id').post((req, res) => {
-    User.findById(req.params.id, (err, user) => {
-        if(!user)
-            return runInNewContext(new Error("Could not load user"));
-        else{
-            user.email = req.body.email;
-            user.password = req.body.password;
-
-            user.save().then(user => {
-                res.json('Update done');
-            }).catch(err => {
-                res.status(400).send('Update failed');
-            });
-        }
-    });
-});
-
-router.route('/users/delete/:id').get((req, res) => {
-    user.findByIdAndRemove({_id: req.params.id}, (err, user) => {
-        if(err)
-            res.json(err);
-        else
-            res.json('Remove successfully');
-    });
-});
-
-router.route('/users/login/:email').post((req, res) => {
-    user.findOne({_email: req.params.email}, (err, user) => {
-        if(err)
-            res.json(err);
-        if(!user)
-            res.json("no user");
-        if(user.password == password)
-            res['user'] = user;
-    })
-})
 
 app.use('/', router);
 app.listen(4000, () => console.log('Express server running on port 4000'));
