@@ -1,6 +1,3 @@
-[submodule "angular-auth-ngrx"]
-	path = angular-auth-ngrx
-	url = https://github.com/mjhea0/angular-auth-ngrx.git
 [submodule "fake-token-api"]
 	path = fake-token-api
 	url = https://github.com/testdrivenio/fake-token-api.git
