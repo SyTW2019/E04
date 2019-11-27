@@ -1,0 +1,21 @@
+.create-form {
+    min-width: 150px;
+    width: 100%;
+}
+
+.field-full-width {
+    width: 90%;
+}
+
+
+.register-form {
+    width: 40%;
+    vertical-align: center;
+    text-align: center;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 5em;  
+    margin-bottom: 5em;  
+
+}

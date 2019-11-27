@@ -34,7 +34,8 @@ export class SignUpComponent implements OnInit {
     console.log(this.user);
     const payload = {
       email: this.user.email,
-      password: this.user.password
+      password: this.user.password,
+      nickname: this.user.nickname
     };
     this.store.dispatch(new SignUp(payload));
   }

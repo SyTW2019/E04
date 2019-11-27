@@ -3,19 +3,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 import mongooose from 'mongoose';
-import User from './models/Enterprise';
-
+import Enterprise from './models/Enterprise';
+import User from './models/User'
 
 const app = express();
 
 const router = express.Router();
 
-
-mongooose.connect('mongodb://localhost:27017/Enterprise');
-const connection = mongooose.connection;
-connection.once('open', () => {
-  console.log('MongoDB database connecion established successfully!');
-})
+const url_enterprise = 'mongodb://localhost:27017/Enterprise';
+const url_user = 'mongodb://localhost:27017/User';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -25,16 +21,19 @@ app.get('/ping', (req, res, next) => {
   res.status(200).json('pong!');
 });
 
-app.post('/register', (req, res, next) => {
-  console.log(req.body);
+router.route('/register').post((req, res, next) => {
+  mongooose.connect(url_user);
+  const connection = mongooose.connection;
   let user = new User(req.body);
-  user.nickname = "hola mundo3435dddw2ghghfff3135";
   console.log(user);
   user.save()
   .then(user => {
     jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
-      if (err) { console.log(err) }
-      console.log(token);
+      if (err) {       
+        res.status(422).json({
+        status: 'error',
+        errorMessage: err
+      })} else {
       res.status(200).json({
         status: 'success',
         user : {
@@ -45,7 +44,7 @@ app.post('/register', (req, res, next) => {
         },
         token: token,
         errorMessage: null
-      })
+      })}
     });
   })
   .catch(err => {
@@ -54,7 +53,10 @@ app.post('/register', (req, res, next) => {
   });
 });
 
+
 router.route('/login').post((req, res, next) => {
+  mongooose.connect(url_user);
+  const connection = mongooose.connection;
   const { body } = req;
   const { email } = body;
   const { password } = body;
@@ -99,6 +101,18 @@ router.route('/login').post((req, res, next) => {
   })
 });
 
+router.route('/register-enterprise').post((req, res, next) => {
+  mongooose.connect(url_enterprise);
+  const connection = mongooose.connection;
+
+});
+
+
+router.route('/login-enterprise').post((req, res, next) => {
+  mongooose.connect(url_enterprise);
+  const connection = mongooose.connection;
+});
+
 //Check to make sure header is not undefined, if so, return Forbidden (403)
 const checkToken = (req, res, next) => {
   const header = req.headers['authorization'];
@@ -116,6 +130,8 @@ const checkToken = (req, res, next) => {
 }
 
 router.route('/users').get((req, res) => {
+  mongooose.connect(url_user);
+  const connection = mongooose.connection;
   User.find((err, users) => {
     if (err)
       console.log(err);

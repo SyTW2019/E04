@@ -20,8 +20,10 @@ export const initialState: State = {
 };
 
 export function reducer(state = initialState, action: All): State {
-  console.log(action.type);
+  console.log(state);
+  console.log(action)
   switch (action.type) {
+    
     case AuthActionTypes.LOGIN_SUCCESS: {
       return {
         ...state,
@@ -60,6 +62,7 @@ export function reducer(state = initialState, action: All): State {
       return initialState;
     }
     default: {
+      console.log("hola");
       return state;
     }
   }

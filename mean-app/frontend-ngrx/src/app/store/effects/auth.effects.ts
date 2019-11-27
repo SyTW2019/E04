@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs';  
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -64,7 +60,7 @@ export class AuthEffects {
     map((action: SignUp) => action.payload)).pipe(
     switchMap(payload => {
       console.log(payload);
-      return this.authService.signUp(payload.email, payload.password).pipe(
+      return this.authService.signUp(payload.email, payload.password, payload.nickname).pipe(
         map((user) => {
           return new SignUpSuccess({token: user.token, email: payload.email});
         })).pipe(

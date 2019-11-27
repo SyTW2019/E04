@@ -8,9 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './app.effects';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './store/reducers';
+import { reducers } from './store/app.states';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -21,6 +20,11 @@ import {
 } from './services/token.interceptor';
 import { StatusComponent } from './components/status/status.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -35,9 +39,8 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(reducers, {
-      metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true
@@ -49,7 +52,22 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
       { path: 'status', component: StatusComponent, canActivate: [AuthGuard] },
       { path: '', component: LandingComponent },
       { path: '**', redirectTo: '/' }
-    ])
+    ]),
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatTableModule,
+    MatDividerModule,
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    HttpClientModule
   ],
   providers: [
     AuthService,
@@ -63,7 +81,8 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
       multi: true
-    }
+    },
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
