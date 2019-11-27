@@ -22,15 +22,20 @@ let Enterprise = new Schema({
     name: {
         type: String
     },
-    phone: {
-        type: Int16Array
+    address: {
+        type: String,
+        required: true,
+        dropDups: true
     },
+    //phone: {
+    //    type: Int16Array
+    //},
     description: {
         type: String
-    },
-    products: [{
-        type: mongoose.Schema.Types.ObjectId, ref: 'Product'
-    }]
+    }
+    //products: [{
+      //  type: mongoose.Schema.Types.ObjectId, ref: 'Product'
+    //}]
 });
 
 Enterprise.plugin(uniqueValidator)

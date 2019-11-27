@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 import mongooose from 'mongoose';
-import User from './models/User';
+import User from './models/Enterprise';
 
 
 const app = express();
@@ -11,7 +11,7 @@ const app = express();
 const router = express.Router();
 
 
-mongooose.connect('mongodb://localhost:27017/users');
+mongooose.connect('mongodb://localhost:27017/Enterprise');
 const connection = mongooose.connection;
 connection.once('open', () => {
   console.log('MongoDB database connecion established successfully!');
@@ -39,6 +39,9 @@ app.post('/register', (req, res, next) => {
         status: 'success',
         user : {
           email: user.email
+        },
+        user: {
+          address: user.address
         },
         token: token,
         errorMessage: null
