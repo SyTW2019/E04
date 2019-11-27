@@ -1,16 +1,17 @@
 export class User {
-    email:String;
-    password:String;
-    nickname:String;
-    name:String;
-    surname:String;
-    birthdate: Date;
-    description:String;
-    instagram:String;
-    facebook:String;
-    twitter:String;
-    sex:String;
-    phone:Int16Array;
+    email?:String;
+    password?:String;
+    nickname?:String;
+    name?:String;
+    surname?:String;
+    birthdate?: Date;
+    description?:String;
+    instagram?:String;
+    facebook?:String;
+    twitter?:String;
+    sex?:String;
+    phone?:Int16Array;
+    token?: string
   /*
     constructor(email:String, password:String, nickname:String, name:String, surname:String, birthdate: Date, description:String, instagram:String, facebook:String, twitter:String, sex:String, phone: Int16Array){
       this.email = email;

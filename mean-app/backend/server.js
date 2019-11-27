@@ -52,17 +52,11 @@ app.post('/register', (req, res, next) => {
 });
 
 router.route('/login').post((req, res, next) => {
-  console.log('hola');
   const { body } = req;
   const { email } = body;
   const { password } = body;
-  console.log(email);
-  console.log(password);
   User.findOne({ email: email }, (err, user) => {
-    console.log(user);
-
     if (err) {
-      console.log(err);
       res.status(422).json({
         status: 'error',
         errorMessage: err
@@ -78,8 +72,11 @@ router.route('/login').post((req, res, next) => {
       if (email === user.email && password === user.password) {
         //if user log in success, generate a JWT token for the user with a secret key
         jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
-          if (err) { console.log(err) }
-          console.log(token);
+          if (err) { 
+            res.status(422).json({
+            status: 'error',
+            errorMessage: 'not matching user and password'
+          }) } else {
           res.status(201).json({
             status: 'success',
             user : {
@@ -87,7 +84,7 @@ router.route('/login').post((req, res, next) => {
             },
             token: token,
             errorMessage: null
-          })
+          })}
         });
       } else {
         res.status(422).json({

@@ -1,40 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, Form, NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserService } from '../../user.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { User } from '../../models/user';
+import { AppState, selectAuthState } from '../../store/app.states';
+import { LogIn } from '../../store/actions/auth.actions';
+
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-log-in',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
-  emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  serverErrorMessages: string;
+  user: User = new User();
+  getState: Observable<any>;
+  errorMessage: string | null;
 
-
-  constructor(private userService: UserService, private fb: FormBuilder, private router: Router) {
-    this.loginForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    })
-   }
-
-  login(email: String, password: String) {
-    this.userService.checkUser(email, password).subscribe(
-      res => {
-        this.userService.initSession(res['user']);
-        this.router.navigateByUrl('/home');
-    },
-    err => {
-      this.serverErrorMessages = err.error.message;
-      }
-    );
+  constructor(
+    private store: Store<AppState>
+  ) {
+    this.getState = this.store.select(selectAuthState);
   }
 
   ngOnInit() {
+    this.getState.subscribe((state) => {
+      this.errorMessage = state.errorMessage;
+    });
+  }
+
+  onSubmit(): void {
+    const payload = {
+      email: this.user.email,
+      password: this.user.password
+    };
+    this.store.dispatch(new LogIn(payload));
   }
 
 }

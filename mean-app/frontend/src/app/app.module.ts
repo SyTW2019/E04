@@ -16,13 +16,15 @@ import { ListComponent } from './components/list/list.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'list', component: ListComponent},
   { path: 'home', component: HomeComponent},
-  { path: '', redirectTo: 'list', pathMatch: 'full'}
+  { path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 
 @NgModule({
@@ -53,7 +55,8 @@ const routes: Routes = [
     MatDividerModule,
     MatSnackBarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
