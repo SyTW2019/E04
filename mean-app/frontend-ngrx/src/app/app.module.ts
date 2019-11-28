@@ -24,7 +24,7 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule, MatGridListModule } from '@angular/material';
 
 
 @NgModule({
@@ -70,7 +70,9 @@ import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, 
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    HttpClientModule
+    HttpClientModule,
+    MatMenuModule,
+    MatGridListModule
   ],
   providers: [
     AuthService,
