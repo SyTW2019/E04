@@ -27,6 +27,16 @@ let Enterprise = new Schema({
         required: true,
         dropDups: true
     },
+    enterprise: {
+        type: String,
+        required: true,
+        dropDups: true
+    },
+    cif: {
+        type: String,
+        required: true,
+        dropDups: true
+    },
     //phone: {
     //    type: Int16Array
     //},

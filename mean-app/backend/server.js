@@ -104,7 +104,39 @@ router.route('/login').post((req, res, next) => {
 router.route('/register-enterprise').post((req, res, next) => {
   mongooose.connect(url_enterprise);
   const connection = mongooose.connection;
-
+  let user = new Enterprise(req.body);
+  console.log(user);
+  user.save()
+  .then(user => {
+    jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
+      if (err) {       
+        res.status(422).json({
+        status: 'error',
+        errorMessage: err
+      })} else {
+      res.status(200).json({
+        status: 'success',
+        user : {
+          email: user.email
+        },
+        user: {
+          address: user.address
+        },
+        user: {
+          enterprise: user.enterprise
+        },
+        user: {
+          cif: user.cif
+        },
+        token: token,
+        errorMessage: null
+      })}
+    });
+  })
+  .catch(err => {
+    console.log(err)
+      res.status(400).send('Failed to create new user');
+  });
 });
 
 

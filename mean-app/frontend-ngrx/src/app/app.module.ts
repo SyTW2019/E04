@@ -13,6 +13,7 @@ import { reducers } from './store/app.states';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { SignUp2Component } from './components/sign-up-2/sign-up.component';
 import { AuthService } from './services/auth.service';
 import { AuthEffects } from './store/effects/auth.effects';
 import {
@@ -32,6 +33,7 @@ import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, 
     LogInComponent,
     LandingComponent,
     SignUpComponent,
+    SignUp2Component,
     StatusComponent
   ],
   imports: [
@@ -49,6 +51,7 @@ import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, 
     RouterModule.forRoot([
       { path: 'log-in', component: LogInComponent },
       { path: 'sign-up', component: SignUpComponent },
+      { path: 'sign-up-2', component: SignUp2Component },
       { path: 'status', component: StatusComponent, canActivate: [AuthGuard] },
       { path: '', component: LandingComponent },
       { path: '**', redirectTo: '/' }
