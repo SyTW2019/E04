@@ -9,8 +9,8 @@
        
        <span class="space"></span>
      
-       <a [routerLink]="['/log-in']" mat-button>Log in</a>
-      
+       <a #doSomethingElse [routerLink]="['/log-in']" mat-button>Log in</a>
+       <button #doSomething class="btn btn-primary" (click)="logOut()">Log out</button>
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -30,7 +30,7 @@
 
       <div class="h-100 row align-items-center">
             
-            <div *ngIf="isAuthenticated; then doSomething; else doSomethingElse;"></div>
+        <div *ngIf="isAuthenticated; then doSomething; else doSomethingElse;"></div>
             
             <ng-template #doSomething>
               <p>You logged in <em>{{user.email}}!</em></p>

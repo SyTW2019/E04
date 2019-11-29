@@ -53,7 +53,7 @@ import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, M
       { path: 'sign-up', component: SignUpComponent },
       { path: 'sign-up-2', component: SignUp2Component },
       { path: 'status', component: StatusComponent, canActivate: [AuthGuard] },
-      { path: '', component: LandingComponent },
+      { path: 'home', component: LandingComponent },
       { path: '**', redirectTo: '/' }
     ]),
     ReactiveFormsModule,

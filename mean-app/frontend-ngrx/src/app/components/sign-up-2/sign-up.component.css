@@ -17,3 +17,17 @@
     margin-right: auto; 
     margin-top: 5em;  
 }
+
+.space {
+    flex: 1 1 auto;
+  }
+  
+  body {
+    background: url("../../../public/architecture-buildings-business-city-358502.jpg");
+    background-attachment: fixed; 
+        background-clip: border-box; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover; 
+  
+}
