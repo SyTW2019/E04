@@ -4,7 +4,8 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 import mongooose from 'mongoose';
 import Enterprise from './models/Enterprise';
-import User from './models/User'
+import User from './models/User';
+import Product from './models/Product';
 
 const app = express();
 
@@ -12,6 +13,7 @@ const router = express.Router();
 
 const url_enterprise = 'mongodb://localhost:27017/Enterprise';
 const url_user = 'mongodb://localhost:27017/User';
+const url_products = 'mongodb://localhost:27017/User';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -137,6 +139,17 @@ router.route('/users').get((req, res) => {
       console.log(err);
     else
       res.json(users);
+  });
+});
+
+router.get('/home', checkToken, (req, res) => {
+  mongooose.connect(url_user);
+  const connection = mongooose.connection;
+  Product.find((err, products) => {
+    if(err)
+      console.log(err);
+    else
+      res.json(products);
   });
 });
 
