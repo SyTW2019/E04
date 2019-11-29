@@ -1,41 +1,71 @@
-<mat-card class="register-form">
-  <div class="row">
-      <div class="col-md-4">
-        <section class="mat-typography">
-            <h3>
-                Angular + NGRX
-            </h3>
-        </section>
-        <mat-divider></mat-divider>
-    
-        <div *ngIf="isAuthenticated; then doSomething; else doSomethingElse;"></div>
-        <ng-template #doSomething>
-          <p>You logged in <em>{{user.email}}!</em></p>
-          <button class="btn btn-primary" (click)="logOut()">Log out</button>
-        </ng-template>
-        <ng-template #doSomethingElse>
-          <a [routerLink]="['/log-in']" mat-raised-button class="btn btn-primary" color="primary">Log in</a>
-          <a [routerLink]="['/sign-up']" mat-raised-button class="btn btn-primary" color="danger">Sign up</a>
-        </ng-template>
-        <a [routerLink]="['/status']" mat-raised-button class="btn btn-primary" color="orange">Status</a>
-    
-        <mat-divider></mat-divider>
-        
-        
-        <mat-card class="register-form" style="width: 18rem;">
-          <div class="card-body">
-            <mat-card-title>
-              Current State
-            </mat-card-title>
-            <ul>
-              <li><strong>isAuthenticated</strong> - {{isAuthenticated}}</li>
-              <li><strong>user.email</strong> - {{ user?.email || 'null'}}</li>
-              <li><strong>token</strong> - {{ token || 'null'}}</li>
-              <li><strong>errorMessage</strong> - {{ errorMessage || 'null'}}</li>
-            </ul>
+
+
+
+<mat-toolbar color="primary">
+    <mat-toolbar-row >
+      
+      <mat-icon>favorite</mat-icon>
+       <span><h1 href="/">LOGO NAME</h1></span>
+       
+       <span class="space"></span>
+     
+       <a #doSomethingElse [routerLink]="['/log-in']" mat-button>Log in</a>
+       <button #doSomething class="btn btn-primary" (click)="logOut()">Log out</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+
+  
+      <div class="row align-items-center">
+          <div class="col-6 offset-md-3">
+          
+            <section class="mat-typography">
+                <h1>
+                    MAIN PAGE
+                </h1>
+            </section>
           </div>
-        </mat-card>
-    
-      </div>
-    </div>
-</mat-card>    
+          </div>
+
+      <div class="h-100 row align-items-center">
+            
+        <div *ngIf="isAuthenticated; then doSomething; else doSomethingElse;"></div>
+            
+            <ng-template #doSomething>
+              <p>You logged in <em>{{user.email}}!</em></p>
+              <button class="btn btn-primary" (click)="logOut()">Log out</button>
+            </ng-template>
+            <ng-template #doSomethingElse>
+              <div class="col-md-4">
+                  <a [routerLink]="['/sign-up']" mat-raised-button class="btn btn-primary" color="primary">Sign up</a>
+              </div>
+              
+              <div class="col-md-4">
+              <a [routerLink]="['/sign-up-2']" mat-raised-button class="btn btn-primary" color="primary">Sign up Enterprise</a>
+              </div>
+            </ng-template>
+            <a [routerLink]="['/status']" mat-raised-button class="btn btn-primary" color="orange">Status</a>
+        
+            <mat-divider></mat-divider>
+            
+            
+            <mat-card class="register-form" style="width: 18rem;">
+              <div class="card-body">
+                <mat-card-title>
+                  Current State
+                </mat-card-title>
+                <ul>
+                  <li><strong>isAuthenticated</strong> - {{isAuthenticated}}</li>
+                  <li><strong>user.email</strong> - {{ user?.email || 'null'}}</li>
+                  <li><strong>token</strong> - {{ token || 'null'}}</li>
+                  <li><strong>errorMessage</strong> - {{ errorMessage || 'null'}}</li>
+                </ul>
+              </div>
+            </mat-card>
+        
+        </div>
+      
+
+          
+ 

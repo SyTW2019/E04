@@ -1,3 +1,17 @@
+<body>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          
+          <mat-icon>favorite</mat-icon>
+           <span><h1 href="/">LOGO NAME</h1></span>
+           
+           <span class="space"></span>
+         
+           <a [routerLink]="['/log-in']" mat-button>Log in</a>
+          
+        </mat-toolbar-row>
+      </mat-toolbar>
+      
 <mat-card class="login-form">
   <div class="row">
     <div class="col-md-4">
@@ -23,7 +37,7 @@
             #email>
         </mat-form-field>
         <mat-form-field class="field-full-width">
-            <input matInput placeholder="password"
+            <input type ="password" matInput placeholder="password"
             [(ngModel)]="user.password"
             required
             name="password"
@@ -41,3 +55,5 @@
     </div>
   </div>
 </mat-card>
+    
+</body>

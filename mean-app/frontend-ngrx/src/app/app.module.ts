@@ -13,6 +13,7 @@ import { reducers } from './store/app.states';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { SignUp2Component } from './components/sign-up-2/sign-up.component';
 import { AuthService } from './services/auth.service';
 import { AuthEffects } from './store/effects/auth.effects';
 import {
@@ -23,7 +24,7 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule, MatGridListModule } from '@angular/material';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, 
     LogInComponent,
     LandingComponent,
     SignUpComponent,
+    SignUp2Component,
     StatusComponent
   ],
   imports: [
@@ -49,8 +51,9 @@ import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, 
     RouterModule.forRoot([
       { path: 'log-in', component: LogInComponent },
       { path: 'sign-up', component: SignUpComponent },
+      { path: 'sign-up-2', component: SignUp2Component },
       { path: 'status', component: StatusComponent, canActivate: [AuthGuard] },
-      { path: '', component: LandingComponent },
+      { path: 'home', component: LandingComponent },
       { path: '**', redirectTo: '/' }
     ]),
     ReactiveFormsModule,
@@ -67,7 +70,9 @@ import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, 
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    HttpClientModule
+    HttpClientModule,
+    MatMenuModule,
+    MatGridListModule
   ],
   providers: [
     AuthService,

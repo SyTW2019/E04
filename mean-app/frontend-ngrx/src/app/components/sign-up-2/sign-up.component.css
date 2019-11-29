@@ -1,0 +1,33 @@
+.create-form {
+    min-width: 150px;
+    width: 100%;
+}
+
+.field-full-width {
+    width: 90%;
+}
+
+
+.register-form {
+    width: 40%;
+    vertical-align: center;
+    text-align: center;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 5em;  
+}
+
+.space {
+    flex: 1 1 auto;
+  }
+  
+  body {
+    background: url("../../../public/architecture-buildings-business-city-358502.jpg");
+    background-attachment: fixed; 
+        background-clip: border-box; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover; 
+  
+}

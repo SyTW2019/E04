@@ -1,0 +1,68 @@
+<body>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          
+          <mat-icon>favorite</mat-icon>
+           <span><h1 href="/">LOGO NAME</h1></span>
+           
+           <span class="space"></span>
+         
+           <a [routerLink]="['/log-in']" mat-button>Log in</a>
+          
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+<mat-card class="register-form">
+
+    <div class="row">
+        <div class="col-md-4">
+            <mat-card-title>
+                <section class="mat-typography">
+                    <h3>
+                        Register
+                    </h3>
+                </section>
+            </mat-card-title>
+            <br>
+            <div *ngIf="errorMessage">
+                <div class="alert alert-danger" role="alert">
+                    {{errorMessage}}
+                </div>
+            </div>
+            <form (ngSubmit)="onSubmit()" class="create-form" ngNativeValidate>
+                <mat-form-field class="field-full-width">
+                    <input matInput placeholder="email" [(ngModel)]="user.email" required name="email" id="email"
+                        #email>
+                </mat-form-field>
+                <mat-form-field class="field-full-width">
+                    <input matInput placeholder="password" [(ngModel)]="user.password" required name="password"
+                        id="password" #password>
+                </mat-form-field>
+                <mat-form-field class="field-full-width">
+                    <input matInput placeholder="nickname" [(ngModel)]="user.nickname" required name="nickname"
+                        id="nickname" #nickname>
+                </mat-form-field>
+                <mat-form-field class="field-full-width">
+                    <input matInput placeholder="address" [(ngModel)]="user.address" required name="address"
+                        id="address" #address>
+                </mat-form-field>
+                <mat-form-field class="field-full-width">
+                    <input matInput placeholder="enterprise" [(ngModel)]="user.enterprise" required name="enterprise"
+                        id="enterprise" #enterprise>
+                </mat-form-field>
+                <mat-form-field class="field-full-width">
+                    <input matInput placeholder="cif" [(ngModel)]="user.cif" required name="cif"
+                        id="cif" #cif>
+                </mat-form-field>
+                <br>
+                <button mat-raised-button type="submit" class="btn btn-primary" color="primary">Submit</button>
+                <a mat-raised-button [routerLink]="['/']" class="btn btn-success">Cancel</a>
+            </form>
+            <p>
+                <span>Already have an account?&nbsp;</span>
+                <a [routerLink]="['/log-in']">Log in</a>
+            </p>
+        </div>
+    </div>
+</mat-card>
+</body>
