@@ -33,7 +33,7 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.logIn(payload.email, payload.password).pipe(
         map((user) => {
-          return new LogInSuccess({token: user.token, email: payload.email});
+          return new LogInSuccess({token: user.token, email: payload.email, type: user.type});
         })).pipe(
         catchError((error) => {
           return of(new LogInFailure({ error: error }));
@@ -69,6 +69,7 @@ export class AuthEffects {
           return of(new SignUpFailure({ error: error }));
         }));
     }));
+    
 
   @Effect({ dispatch: false })
   SignUpSuccess: Observable<any> = this.actions.pipe(
@@ -87,22 +88,22 @@ export class AuthEffects {
 
   @Effect()
   SignUp2: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.SIGNUP)).pipe(
-    map((action: SignUp) => action.payload)).pipe(
+    ofType(AuthActionTypes.SIGNUP2)).pipe(
+    map((action: SignUp2) => action.payload)).pipe(
     switchMap(payload => {
       console.log(payload);
-      return this.authService.signUp(payload.email, payload.password, payload.nickname).pipe(
+      return this.authService.signUp2(payload.email, payload.password, payload.nickname, payload.address, payload.enterprise, payload.cif).pipe(
         map((user) => {
-          return new SignUpSuccess({token: user.token, email: payload.email});
+          return new SignUpSuccess2({token: user.token, email: payload.email});
         })).pipe(
         catchError((error) => {
-          return of(new SignUpFailure({ error: error }));
+          return of(new SignUpFailure2({ error: error }));
         }));
     }));
 
   @Effect({ dispatch: false })
   SignUpSuccess2: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.SIGNUP_SUCCESS),
+    ofType(AuthActionTypes.SIGNUP_SUCCESS2),
     tap((user) => {
       console.log(user);
       localStorage.setItem('token', user.payload.token);
@@ -112,7 +113,7 @@ export class AuthEffects {
 
   @Effect({ dispatch: false })
   SignUpFailure2: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.SIGNUP_FAILURE)
+    ofType(AuthActionTypes.SIGNUP_FAILURE2)
   );
 
   @Effect({ dispatch: false })

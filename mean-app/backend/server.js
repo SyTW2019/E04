@@ -11,9 +11,7 @@ const app = express();
 
 const router = express.Router();
 
-const url_enterprise = 'mongodb://localhost:27017/Enterprise';
-const url_user = 'mongodb://localhost:27017/User';
-const url_products = 'mongodb://localhost:27017/User';
+const url = 'mongodb://localhost:27017/';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -24,40 +22,43 @@ app.get('/ping', (req, res, next) => {
 });
 
 router.route('/register').post((req, res, next) => {
-  mongooose.connect(url_user);
+  mongooose.connect(url);
   const connection = mongooose.connection;
   let user = new User(req.body);
   console.log(user);
-  user.save()
-  .then(user => {
-    jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
-      if (err) {       
-        res.status(422).json({
-        status: 'error',
-        errorMessage: err
-      })} else {
-      res.status(200).json({
-        status: 'success',
-        user : {
-          email: user.email
-        },
-        user: {
-          address: user.address
-        },
-        token: token,
-        errorMessage: null
-      })}
-    });
-  })
-  .catch(err => {
-    console.log(err)
+  Enterprise.findOne({email: user.email}, (err, auxEnterprise) => {
+      if(!auxEnterprise){
+        user.save()
+        .then(user => {
+          jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
+            if (err) {       
+              res.status(422).json({
+              status: 'error',
+              errorMessage: err
+            })} else {
+            res.status(200).json({
+              status: 'success',
+              user : {
+                email: user.email
+              },
+              token: token,
+              errorMessage: null
+            })}
+          });
+        })
+        .catch(err => {
+          console.log(err)
+          res.status(400).send('Failed to create new user');
+        });
+      } else {
       res.status(400).send('Failed to create new user');
-  });
-});
+      }
+  })
+})
 
 
 router.route('/login').post((req, res, next) => {
-  mongooose.connect(url_user);
+  mongooose.connect(url);
   const connection = mongooose.connection;
   const { body } = req;
   const { email } = body;
@@ -70,9 +71,26 @@ router.route('/login').post((req, res, next) => {
       })
     }
     if (!user) {
-      res.status(422).json({
-        status: 'error',
-        errorMessage: err
+      Enterprise.findOne({ email: email}, (err, enterprise) => {
+        if(email === enterprise.email && password === enterprise.password) {
+          //if user log in success, generate a JWT token for the user with a secret key
+        jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
+          if (err) { 
+            res.status(422).json({
+            status: 'error',
+            errorMessage: 'not matching user and password'
+          }) } else {
+          res.status(201).json({
+            status: 'success',
+            user : {
+              email: email
+            },
+            type: 'enterprise',
+            token: token,
+            errorMessage: null
+          })}
+        });
+        }
       })
     } else {
       //checking to make sure the user entered the correct username/password combo
@@ -89,6 +107,7 @@ router.route('/login').post((req, res, next) => {
             user : {
               email: email
             },
+            type: 'user',
             token: token,
             errorMessage: null
           })}
@@ -104,48 +123,46 @@ router.route('/login').post((req, res, next) => {
 });
 
 router.route('/register-enterprise').post((req, res, next) => {
-  mongooose.connect(url_enterprise);
+  mongooose.connect(url);
   const connection = mongooose.connection;
   let user = new Enterprise(req.body);
   console.log(user);
-  user.save()
-  .then(user => {
-    jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
-      if (err) {       
-        res.status(422).json({
-        status: 'error',
-        errorMessage: err
-      })} else {
-      res.status(200).json({
-        status: 'success',
-        user : {
-          email: user.email
-        },
-        user: {
-          address: user.address
-        },
-        user: {
-          enterprise: user.enterprise
-        },
-        user: {
-          cif: user.cif
-        },
-        token: token,
-        errorMessage: null
-      })}
-    });
-  })
-  .catch(err => {
-    console.log(err)
+  User.findOne({ email: user.email }, (err, auxUser) => {
+  if (err) {
+    res.status(422).json({
+      status: 'error',
+      errorMessage: err
+    })
+  }
+  if (!auxUser) {
+      user.save()
+      .then(user => {
+        jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
+          if (err) {       
+            res.status(422).json({
+            status: 'error',
+            errorMessage: err
+          })} else {
+          res.status(200).json({
+            status: 'success',
+            user : {
+              email: user.email
+            },
+            token: token,
+            errorMessage: null
+          })}
+        });
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(400).send('Failed to create new user');
+      });
+    } else {
       res.status(400).send('Failed to create new user');
+    }
   });
 });
 
-
-router.route('/login-enterprise').post((req, res, next) => {
-  mongooose.connect(url_enterprise);
-  const connection = mongooose.connection;
-});
 
 //Check to make sure header is not undefined, if so, return Forbidden (403)
 const checkToken = (req, res, next) => {
@@ -164,7 +181,7 @@ const checkToken = (req, res, next) => {
 }
 
 router.route('/users').get((req, res) => {
-  mongooose.connect(url_user);
+  mongooose.connect(url);
   const connection = mongooose.connection;
   User.find((err, users) => {
     if (err)
@@ -174,16 +191,31 @@ router.route('/users').get((req, res) => {
   });
 });
 
-router.get('/home', checkToken, (req, res) => {
-  mongooose.connect(url_user);
-  const connection = mongooose.connection;
-  Product.find((err, products) => {
-    if(err)
-      console.log(err);
-    else
-      res.json(products);
+router.get('/products', checkToken, (req, res) => {
+  //verify the JWT token generated for the user
+  jwt.verify(req.token, 'privatekey', (err, products) => {
+    if(err){
+        //If error send Forbidden (403)
+        console.log('ERROR: Could not connect to the protected route');
+        res.sendStatus(403);
+    } else {
+        //If token is successfully verified, we can send the autorized data 
+        mongooose.connect(url);
+        const connection = mongooose.connection;
+        Product.find((err, products) => {
+          if(err) {
+            console.log(err)
+          }else{
+            res.json({
+              message: 'products returned',
+              products
+            });
+          }
+        }
+      )
+    }
   });
-});
+})
 
 
 app.use('/', router);

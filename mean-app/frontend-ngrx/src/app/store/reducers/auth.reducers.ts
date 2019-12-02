@@ -7,6 +7,7 @@ export interface State {
   isAuthenticated: boolean;
   // if authenticated, there should be a user object
   user: User | null;
+  type: null;
   // error message
   errorMessage: string | null;
   token: string | null;
@@ -15,6 +16,7 @@ export interface State {
 export const initialState: State = {
   isAuthenticated: false,
   user: null,
+  type: null,
   errorMessage: null,
   token: null,
 };
@@ -31,6 +33,7 @@ export function reducer(state = initialState, action: All): State {
         user: {
           email: action.payload.email
         },
+        type: action.payload.type,
         errorMessage: null,
         token: action.payload.token       
       };
@@ -53,6 +56,23 @@ export function reducer(state = initialState, action: All): State {
       };
     }
     case AuthActionTypes.SIGNUP_FAILURE: {
+      return {
+        ...state,
+        errorMessage: 'That email is already in use.'
+      };
+    }
+    case AuthActionTypes.SIGNUP_SUCCESS2: {
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: {
+          email: action.payload.email
+        },
+        token: action.payload.token,
+        errorMessage: null
+      };
+    }
+    case AuthActionTypes.SIGNUP_FAILURE2: {
       return {
         ...state,
         errorMessage: 'That email is already in use.'

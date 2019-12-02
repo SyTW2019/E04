@@ -25,6 +25,7 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule, MatGridListModule } from '@angular/material';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, M
     LandingComponent,
     SignUpComponent,
     SignUp2Component,
-    StatusComponent
+    StatusComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, M
       { path: 'sign-up', component: SignUpComponent },
       { path: 'sign-up-2', component: SignUp2Component },
       { path: 'status', component: StatusComponent, canActivate: [AuthGuard] },
-      { path: 'home', component: LandingComponent },
+      { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+      { path: '', component: LandingComponent },
       { path: '**', redirectTo: '/' }
     ]),
     ReactiveFormsModule,

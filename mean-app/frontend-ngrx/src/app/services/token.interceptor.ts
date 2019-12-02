@@ -4,6 +4,7 @@ import {
   HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 
@@ -38,7 +39,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           localStorage.removeItem('token');
           this.router.navigateByUrl('/log-in');
         }
-        return Observable.throw(response);
+        return throwError(response);
       }));
   }
 }

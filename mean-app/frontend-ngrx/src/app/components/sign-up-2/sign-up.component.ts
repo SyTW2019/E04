@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Enterprise } from '../../models/enterprise';
 import { AppState, selectAuthState } from '../../store/app.states';
-import { SignUp } from '../../store/actions/auth.actions';
+import { SignUp, SignUp2 } from '../../store/actions/auth.actions';
 
 
 @Component({
@@ -22,6 +22,7 @@ export class SignUp2Component implements OnInit {
         private store: Store<AppState>
     ) {
         this.getState = this.store.select(selectAuthState);
+        console.log(this.getState);
     }
 
     ngOnInit() {
@@ -40,7 +41,6 @@ export class SignUp2Component implements OnInit {
             enterprise: this.user.enterprise,
             cif: this.user.cif
         };
-        this.store.dispatch(new SignUp(payload));
+        this.store.dispatch(new SignUp2(payload));
     }
-
 }
