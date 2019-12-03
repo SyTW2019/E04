@@ -46,7 +46,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap((user) => {
       localStorage.setItem('token', user.payload.token);
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/home');
     })
   );
 
@@ -77,7 +77,7 @@ export class AuthEffects {
     tap((user) => {
       console.log(user);
       localStorage.setItem('token', user.payload.token);
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/home');
     })
   );
 
@@ -121,6 +121,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       localStorage.removeItem('token');
+      this.router.navigateByUrl('/');
     })
   );
 

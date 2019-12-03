@@ -82,7 +82,6 @@ export function reducer(state = initialState, action: All): State {
       return initialState;
     }
     default: {
-      console.log("hola");
       return state;
     }
   }

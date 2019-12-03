@@ -26,6 +26,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule, MatGridListModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
+import { MatTabsModule } from '@angular/material';
+
+
+
+
 
 
 @NgModule({
@@ -75,7 +80,8 @@ import { HomeComponent } from './components/home/home.component';
     MatNativeDateModule,
     HttpClientModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTabsModule
   ],
   providers: [
     AuthService,
