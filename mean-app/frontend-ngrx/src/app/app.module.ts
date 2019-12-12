@@ -27,6 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule, MatGridListModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
 import { MatTabsModule } from '@angular/material';
+import { RestrictedComponent } from './restricted/restricted.component';
+import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
 
 
 
@@ -41,7 +43,9 @@ import { MatTabsModule } from '@angular/material';
     SignUpComponent,
     SignUp2Component,
     StatusComponent,
-    HomeComponent
+    HomeComponent,
+    RestrictedComponent,
+    UnrestrictedComponent
   ],
   imports: [
     BrowserModule,
