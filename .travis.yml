@@ -14,7 +14,7 @@ addons:
 
 install:
     - npm install
+    - ng build
 
 script:
-  - cd mean-app/frontend-ngrx
   - npm run test
