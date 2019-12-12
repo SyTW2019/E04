@@ -16,4 +16,5 @@ install:
     - npm install
 
 script:
-  - ng test
+  - npm run test
+  - npm run test-headless
