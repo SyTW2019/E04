@@ -20,6 +20,7 @@ export class LogIn implements Action {
   constructor(public payload: any) {}
 }
 
+
 export class LogInSuccess implements Action {
   readonly type = AuthActionTypes.LOGIN_SUCCESS;
   constructor(public payload: any) {}
