@@ -16,5 +16,5 @@ install:
     - npm install
 
 script:
+  - cd mean-app/frontend-ngrx
   - npm run test
-  - npm run test-headless
