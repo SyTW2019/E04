@@ -15,3 +15,5 @@ addons:
 install:
     - npm install
 
+script:
+  - ng test
