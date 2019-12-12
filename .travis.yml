@@ -13,8 +13,9 @@ addons:
   chrome: stable
 
 install:
+  - npm install -g angular-cli
     - npm install
-    - ng build
+    
 
 script:
   - npm run test
