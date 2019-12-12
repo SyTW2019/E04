@@ -20,21 +20,12 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
-<<<<<<< HEAD
-  
-
-=======
 /*
->>>>>>> e04ff6a51d8a3a4b655d4d36cfbe8f7caa72376c
   it(`should have as title 'frontend-ngrx'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('frontend-ngrx');
-<<<<<<< HEAD
-  });
-=======
   });*/
->>>>>>> e04ff6a51d8a3a4b655d4d36cfbe8f7caa72376c
 /*
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
