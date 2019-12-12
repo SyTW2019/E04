@@ -21,6 +21,6 @@ describe('StatusComponent', () => {
 /*
   it('should create', () => {
     expect(component).toBeTruthy();
-  });*/
+  });
 });
 */
