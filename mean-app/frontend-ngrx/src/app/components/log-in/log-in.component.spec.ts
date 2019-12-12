@@ -50,7 +50,7 @@ describe('Component: Login', () => {
   });
 
 
-  it('should create the app', async(() => {
+  it('is not logged in', async(() => {
     const fixture = TestBed.createComponent(LogInComponent);
     const app = fixture.debugElement.componentInstance;
     expect(selectAuthState).toBeTruthy();
