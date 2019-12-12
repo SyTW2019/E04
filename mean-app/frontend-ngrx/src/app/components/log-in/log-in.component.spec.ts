@@ -4,7 +4,12 @@ import { LogInComponent } from './log-in.component';
 import { AuthService } from "../../services/auth.service";
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+
+import { AuthGuardService } from '../../services/auth-guard.service';
+
+import { AppState, selectAuthState } from '../../store/app.states';
+import { State } from '../../store/reducers/auth.reducers';
 
 describe('Component: Login', () => {
   
@@ -12,7 +17,11 @@ describe('Component: Login', () => {
   let fixture: ComponentFixture<LogInComponent>;
   let authService: AuthService;
   
+  let store: MockStore<{ loggedin: boolean}>;
+  const initialState = {loggedin: false};
+  //let guard: AuthGuardService;
 
+  let State: State;
   
   beforeEach(() => {
       
@@ -20,10 +29,8 @@ describe('Component: Login', () => {
       TestBed.configureTestingModule({
           imports:[RouterTestingModule, FormsModule],
           declarations: [LogInComponent],
-          providers: [AuthService, {
-            provide: Store,
-          
-          }],
+          providers: [AuthService,
+                      provideMockStore({initialState})],
           schemas: [CUSTOM_ELEMENTS_SCHEMA]
       });
 
@@ -34,9 +41,20 @@ describe('Component: Login', () => {
       component = fixture.componentInstance;
 
       // UserService provided to the TestBed
-      authService = TestBed.get(AuthService);
+      //authService = TestBed.get(AuthService);
 
+      
+
+
+      //guard = TestBed.get<AuthGuardService>(AuthGuardService)
   });
+
+
+  it('should create the app', async(() => {
+    const fixture = TestBed.createComponent(LogInComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(selectAuthState).toBeTruthy();
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -48,6 +66,12 @@ describe('Component: Login', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
 /*
   it('should create', () => {
     expect(component).toBeTruthy();

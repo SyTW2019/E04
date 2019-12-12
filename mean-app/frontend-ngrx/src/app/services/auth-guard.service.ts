@@ -18,4 +18,8 @@ export class AuthGuardService implements CanActivate {
     }
     return true;
   }
+
+  loggedin(): boolean{
+    return this.canActivate()
+  }
 }
