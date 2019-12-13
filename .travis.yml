@@ -16,7 +16,6 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 install:
     - npm install codecov -g
-    - npm ci --ignore-scripts
     - npm install
 script:
   - npm run ci
