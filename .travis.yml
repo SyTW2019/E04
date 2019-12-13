@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "13.1.0"
+dist: trusty
+sudo: required
+
+cache:
+  directories:
+    - node_modules
+
+addons:
+  chrome: stable
+before_install:
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+install:
+    - npm install codecov -g
+    - npm ci --ignore-scripts
+    - npm install
+script:
+  - npm run ci
+  
