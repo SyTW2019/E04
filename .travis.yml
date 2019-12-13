@@ -17,6 +17,5 @@ before_install:
 install:
     - npm install codecov -g
     - npm install
-script:
-  - npm run test
+
   
