@@ -23,7 +23,6 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: All): State {
   console.log(state);
-  console.log(action)
   switch (action.type) {
     
     case AuthActionTypes.LOGIN_SUCCESS: {

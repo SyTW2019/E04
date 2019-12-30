@@ -46,6 +46,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap((user) => {
       localStorage.setItem('token', user.payload.token);
+      localStorage.setItem('user', user.payload.email);
       this.router.navigateByUrl('/home');
     })
   );
@@ -60,7 +61,6 @@ export class AuthEffects {
     ofType(AuthActionTypes.SIGNUP)).pipe(
     map((action: SignUp) => action.payload)).pipe(
     switchMap(payload => {
-      console.log(payload);
       return this.authService.signUp(payload.email, payload.password, payload.nickname).pipe(
         map((user) => {
           return new SignUpSuccess({token: user.token, email: payload.email});
@@ -75,8 +75,8 @@ export class AuthEffects {
   SignUpSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.SIGNUP_SUCCESS),
     tap((user) => {
-      console.log(user);
       localStorage.setItem('token', user.payload.token);
+      localStorage.setItem('user', user.payload.email);
       this.router.navigateByUrl('/home');
     })
   );
@@ -91,7 +91,6 @@ export class AuthEffects {
     ofType(AuthActionTypes.SIGNUP2)).pipe(
     map((action: SignUp2) => action.payload)).pipe(
     switchMap(payload => {
-      console.log(payload);
       return this.authService.signUp2(payload.email, payload.password, payload.nickname, payload.address, payload.enterprise, payload.cif).pipe(
         map((user) => {
           return new SignUpSuccess2({token: user.token, email: payload.email});
@@ -105,8 +104,8 @@ export class AuthEffects {
   SignUpSuccess2: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.SIGNUP_SUCCESS2),
     tap((user) => {
-      console.log(user);
       localStorage.setItem('token', user.payload.token);
+      localStorage.setItem('user', user.payload.email);
       this.router.navigateByUrl('/');
     })
   );
@@ -121,6 +120,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       this.router.navigateByUrl('/');
     })
   );

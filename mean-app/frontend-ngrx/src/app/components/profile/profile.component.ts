@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState, selectAuthState } from 'src/app/store/app.states';
+import { LogOut } from 'src/app/store/actions/auth.actions';
 
-import { AppState, selectAuthState } from '../../store/app.states';
-import { LogOut } from '../../store/actions/auth.actions';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class HomeComponent implements OnInit {
-
+export class ProfileComponent implements OnInit {
   getState: Observable<any>;
   user = null;
 
