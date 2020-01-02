@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
       nickname: this.user.nickname
     };
     this.store.dispatch(new SignUp(payload));
-    localStorage.setItem('state', JSON.stringify(this.getState));
+    localStorage.setItem('state', JSON.stringify(this.getState)); // This line doesnt know if it works
   }
 
 }

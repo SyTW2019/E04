@@ -12,9 +12,20 @@
 </mat-toolbar>
 <mat-card class="register-form" style="width: 18rem;">
   <div class="card-body">
+      <img mat-card-avatar src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">	  
     <mat-card-title>
-      Hola
-      {{user.email}}!
+      {{user.email}}
     </mat-card-title>
+    <mat-card-content>
+      <mat-card-subtitle>
+        Email: {{user.email}}
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        Name: {{user.name}}
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        Nickname: {{user.nickname}}
+      </mat-card-subtitle>
+    </mat-card-content>
   </div>
 </mat-card>
