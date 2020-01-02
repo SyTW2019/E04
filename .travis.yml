@@ -16,7 +16,8 @@ addons:
       secure: "YqeWcms1hGO1ozdgADfLsebY7eSzeCC6xYEtYzUlqdvU8AbdqXUjOvEaKkbkDA14pf4WNo7vYN0ueO/f1nnI6gkRY4CVXZ1wZXU7MXb6mKgSWB013kL8qqUpMjQvj1RxBhJz1Sw8VihBCyCbka/0XD4Fn0K/FFgU6ZfiwxQ0N2kfUIrbGg72IGcE6t8sIPfajvt43o1/b3DT2nGV/NH6Zsl7fzvrE0oZqJY6N1th4KoyakYYVEDLeee3Uf+syOIGjmRlfJtpTrgjTJjKJeHwUzNHCsJbXuFkf+pHZvTalJUdCTu2YmQfmXfKnzaGjUvqWtyFZb8+EAeO9ifXmvbK6HENWO77hv32oVG3yuq/sH02pWGqSqNqrdYzka6EXHsSsYehWdMPZJHTe8GUDyu7mq1aL2EbLDeGdJOUqSI3YdqO74nkHEjeVaqN1hGYlatLmSPjfvrdiDCbljdI2Vn/Wk/PbklBKaT/gizj+XSDjk8wgXLvvRSqq+0lhKzw9Wz4Y6R50N3StXVm5NxnfIt1mbjX2RH91i9g43tsqgagJWg8a1dBuEI8YYht3ftX6g1ImOjG2sfq+GFr64c3sRmETDKeypB7pwnVMyQ1gE2xlLp0qapNg3IhkBUvyH5AOITOfmqcJC6VRvv6wpSNwgYBrOLWlpf3iJ4BraUrSnNRjDk="
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - sonar-scanner -D sonar.login=$SONAR_TOKEN
+  - sonar-scanner -D sonar.login=$SONAR_TOKEN sonar.password=
+
 
 before_install:
   - export CHROME_BIN=chromium-browser
