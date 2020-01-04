@@ -1,37 +1,35 @@
 language: node_js
 node_js:
-  - "13.1.0"
+- 13.1.0
 dist: trusty
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 addons:
   chrome: stable
-  firefox: "latest"
+  firefox: latest
   sonarcloud:
-    organization: "sytw2019"
+    organization: sytw2019
     token:
-      secure: "YqeWcms1hGO1ozdgADfLsebY7eSzeCC6xYEtYzUlqdvU8AbdqXUjOvEaKkbkDA14pf4WNo7vYN0ueO/f1nnI6gkRY4CVXZ1wZXU7MXb6mKgSWB013kL8qqUpMjQvj1RxBhJz1Sw8VihBCyCbka/0XD4Fn0K/FFgU6ZfiwxQ0N2kfUIrbGg72IGcE6t8sIPfajvt43o1/b3DT2nGV/NH6Zsl7fzvrE0oZqJY6N1th4KoyakYYVEDLeee3Uf+syOIGjmRlfJtpTrgjTJjKJeHwUzNHCsJbXuFkf+pHZvTalJUdCTu2YmQfmXfKnzaGjUvqWtyFZb8+EAeO9ifXmvbK6HENWO77hv32oVG3yuq/sH02pWGqSqNqrdYzka6EXHsSsYehWdMPZJHTe8GUDyu7mq1aL2EbLDeGdJOUqSI3YdqO74nkHEjeVaqN1hGYlatLmSPjfvrdiDCbljdI2Vn/Wk/PbklBKaT/gizj+XSDjk8wgXLvvRSqq+0lhKzw9Wz4Y6R50N3StXVm5NxnfIt1mbjX2RH91i9g43tsqgagJWg8a1dBuEI8YYht3ftX6g1ImOjG2sfq+GFr64c3sRmETDKeypB7pwnVMyQ1gE2xlLp0qapNg3IhkBUvyH5AOITOfmqcJC6VRvv6wpSNwgYBrOLWlpf3iJ4BraUrSnNRjDk="
-
+      secure: YqeWcms1hGO1ozdgADfLsebY7eSzeCC6xYEtYzUlqdvU8AbdqXUjOvEaKkbkDA14pf4WNo7vYN0ueO/f1nnI6gkRY4CVXZ1wZXU7MXb6mKgSWB013kL8qqUpMjQvj1RxBhJz1Sw8VihBCyCbka/0XD4Fn0K/FFgU6ZfiwxQ0N2kfUIrbGg72IGcE6t8sIPfajvt43o1/b3DT2nGV/NH6Zsl7fzvrE0oZqJY6N1th4KoyakYYVEDLeee3Uf+syOIGjmRlfJtpTrgjTJjKJeHwUzNHCsJbXuFkf+pHZvTalJUdCTu2YmQfmXfKnzaGjUvqWtyFZb8+EAeO9ifXmvbK6HENWO77hv32oVG3yuq/sH02pWGqSqNqrdYzka6EXHsSsYehWdMPZJHTe8GUDyu7mq1aL2EbLDeGdJOUqSI3YdqO74nkHEjeVaqN1hGYlatLmSPjfvrdiDCbljdI2Vn/Wk/PbklBKaT/gizj+XSDjk8wgXLvvRSqq+0lhKzw9Wz4Y6R50N3StXVm5NxnfIt1mbjX2RH91i9g43tsqgagJWg8a1dBuEI8YYht3ftX6g1ImOjG2sfq+GFr64c3sRmETDKeypB7pwnVMyQ1gE2xlLp0qapNg3IhkBUvyH5AOITOfmqcJC6VRvv6wpSNwgYBrOLWlpf3iJ4BraUrSnNRjDk=
 before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - nohup bash -c "./node_modules/protractor/bin/webdriver-manager start 2>&1 &"
-  - sleep 5
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- nohup bash -c "./node_modules/protractor/bin/webdriver-manager start 2>&1 &"
+- sleep 5
 script:
-  - cd mean-app
-  - cd frontend
-  - cd frontend-ngrx
-  - npm install codecov -g
-  - npm install
-  - ng test
-  - cd ../../..
-  - sonar-scanner 
-
-
-    
-
+- cd mean-app
+- cd frontend
+- cd frontend-ngrx
+- npm install codecov -g
+- npm install
+- ng test
+- cd ../../..
+- sonar-scanner
+env:
+  - FOO=foo BAR=bar
+  - FOO=bar BAR=foo
+  global:
+    secure: h6E53YSQVcx0m7+F9V4W4QwRoO504As4dO49EQmsKnV4Mf5lXQJRzaLAPExOny2ty4gxv9QYSxtXEAOw6KqnEeHyfbawlmHKlCTStZpNw7lKVvSeehDDqxZSj2twJpNl8oEgTe92l4coXOojVPZqIl53l5hm+LRT/weB9cius+3lymUnG6Ej9P0QsXRCOi7nvJfFxEmD3dZTERr8m8sKl4TIp0xESQxk5oeIolTXkLIBQ8IYi5ML20ZGU9NK8syQmXV81ZlMBe6PSKKejocY5cwOhRBzjVmL7ltyqBNtJEGuyuIe25swsIvTLkCjRT2qjBNIL61IjvYGq/ai1ANH74pWxAbWf0i0rHdwlAcOyIRMNZ4wYkf6r0mG7ZNVcU/X+2AfkwP8xwb7/X4+xMJ3rM417rA0WgpSE+RUJS4/tARXAVO0zKOR3Z3cXq59jskECgULY8X5BjSxFJcWXW6T3hg6hbo78W78eV8DkXlk1vwQA4gz5VkMG3K1QqApySxSQLUIuOAnu9jnR1DueZ7NOFDhp17B7pchiXi1E9O0+y6j+hvKb38VeBqVk/kHI5MYZBnLKdKew459XZD2aCfJSxLo9GIKiymTN8v1GHfRqp+IoaYDiaY93kjRBQyHEdazM36pq6p135OvU0QL9x6AGeCrI3QAE+wCJmcCGwZ3ktQ=
