@@ -28,7 +28,7 @@ before_install:
   - cd frontend-ngrx
   - npm install codecov -g
   - npm install
-  - ng test
+  - ng e2e
   - cd ../../..
   - sonar-scanner 
 
