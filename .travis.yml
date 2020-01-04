@@ -22,7 +22,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - nohup bash -c "./node_modules/protractor/bin/webdriver-manager start 2>&1 &"
   - sleep 5
-  script:
+script:
   - cd mean-app
   - cd frontend
   - cd frontend-ngrx
