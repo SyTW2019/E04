@@ -23,8 +23,6 @@ script:
   - npm install
   - ng e2e
   - cd ../../..
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - sonar-scanner -Dsonar.login=$SONAR_TOKEN -Dsonar.password=""
   - sonar-scanner 
 
 
