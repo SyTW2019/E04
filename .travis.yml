@@ -28,7 +28,7 @@ script:
   - cd frontend-ngrx
   - npm install codecov -g
   - npm install
-  - ng e2e
+  - ng test
   - cd ../../..
   - sonar-scanner 
 
