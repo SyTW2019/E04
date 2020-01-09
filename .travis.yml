@@ -23,6 +23,9 @@ before_script:
 script:
   - npm install codecov -g
   - npm install
+  - npm audit fix
+  - ng test
+
 
   #- cd ../../..
   #- sonar-scanner -Dsonar.login=$SECRET_KEY 
