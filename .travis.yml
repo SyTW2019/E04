@@ -28,4 +28,4 @@ script:
 
 
   - cd ../../..
-  - sonar-scanner -Dsonar.login=$TOKEN_ 
+  - sonar-scanner 
