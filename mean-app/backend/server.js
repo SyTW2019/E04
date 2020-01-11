@@ -190,10 +190,11 @@ router.route('/users').get((req, res) => {
       res.json(users);
   });
 });
-
+/*
 router.route('/user').get((req, res) => {
   User.findOne()
 })
+*/
 
 router.get('/products', checkToken, (req, res) => {
   //verify the JWT token generated for the user
@@ -219,6 +220,90 @@ router.get('/products', checkToken, (req, res) => {
       )
     }
   });
+})
+
+router.route('/add-product').post((req, res, next) => {
+  console.log(req.body);
+  /*jwt.verify(req.token, 'privatekey', (err, res) => {
+    if(err){
+      //If error send Forbidden (403)
+      console.log('ERROR: Could not connect to the protected route');
+      res.sendStatus(403);
+    } else {
+      */
+      mongooose.connect(url);
+      const connection = mongooose.connection;
+      let product = new Product(req.body);
+      console.log(product);
+      Product.findOne({name: product.name}, (err, auxProduct) => {
+          if(!auxProduct){
+            product.save()
+            .catch(err => {
+              console.log(err)
+              res.status(400).send('Failed to create new product');
+          });
+        } else {
+          res.status(400).send('Product code exist yet');
+        }
+      })
+    //}
+  })
+//})
+
+router.route('/like-product').post((req, res, next) => {
+  jwt.verify(req.token, 'privatekey', (err, res) => {
+    if(err){
+      //If error send Forbidden (403)
+      console.log('ERROR: Could not connect to the protected route');
+      res.sendStatus(403);
+    } else {
+      mongooose.connect(url);
+      const connection = mongoose.connection;
+      let code = req.body;
+      let liker = new User(req.body);
+      console.log(code);
+      Product.findOne({code: code}, (err, product) => {
+        if(product){
+          let users = Array.from(product.users);
+          console.log(users.push(liker));
+          console.log(users);
+          product.users = users;
+          product.save().catch(err => {
+            console.log(err)
+            res.status(400).send('Failed to like product');
+          })
+        } else {
+          res.status(400).send('Failed to like product');
+        }
+      })
+    } 
+  })
+})
+
+router.route('/edit-product').post((req, res, next) => {
+  jwt.verify(req.token, 'privatekey', (err, res) => {
+    if(err) {
+      //If error send Forbidden (403)
+      console.log('ERROR: Could not connect to the protected route');
+      res.sendStatus(403);
+    } else {
+      mongooose.connect(url);
+      const connection = mongooose.connection;
+      let product = req.body;
+      console.log(product);
+      Product.findOne({code: product.code}, (err, productAux) => {
+        if(productAux){
+          productAux = product;
+          productAux.save().catch(err => {
+            console.log(err)
+            res.status(400).send('Failed to edit product');
+          })
+        } else {
+          res.status(400).send('Failed to edit product');
+        }
+      })
+    } 
+  })
 })
 
 

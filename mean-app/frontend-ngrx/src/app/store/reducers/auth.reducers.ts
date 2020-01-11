@@ -1,12 +1,13 @@
 import { User } from '../../models/user';
 import { AuthActionTypes, All } from '../actions/auth.actions';
+import { Enterprise } from 'src/app/models/enterprise';
 
 
 export interface State {
   // is a user authenticated?
   isAuthenticated: boolean;
   // if authenticated, there should be a user object
-  user: User | null;
+  user: User | Enterprise | null;
   type: null;
   // error message
   errorMessage: string | null;
