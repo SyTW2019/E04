@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule ,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, CanActivate } from '@angular/router';
@@ -30,12 +31,9 @@ import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, M
 import {MatListModule} from '@angular/material/list';
 import { HomeComponent } from './components/home/home.component';
 import { MatTabsModule } from '@angular/material';
-<<<<<<< HEAD
 import { RestrictedComponent } from './restricted/restricted.component';
 import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
-=======
 import { ProfileComponent } from './components/profile/profile.component';
->>>>>>> 41cce266f5f097ff3fc6773f435b1d835a6ec242
 
 
 
@@ -50,12 +48,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     SignUp2Component,
     StatusComponent,
     HomeComponent,
-<<<<<<< HEAD
     RestrictedComponent,
     UnrestrictedComponent
-=======
-    ProfileComponent
->>>>>>> 41cce266f5f097ff3fc6773f435b1d835a6ec242
   ],
   imports: [
     BrowserModule,
