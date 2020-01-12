@@ -42,7 +42,7 @@
   </div>
 </mat-card>
 <mat-list>
-  <mat-list-item *ngFor="let product of products">
+  <mat-list-item *ngFor="let product of products | async">
     <mat-card class="home-card">
       <div class="card-body">
         <mat-card-title>

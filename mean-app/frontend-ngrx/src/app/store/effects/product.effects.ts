@@ -13,12 +13,15 @@ import {
     GetProducts, GetProductsFailure, GetProductsSuccess,
     ProductActionTypes
 } from '../actions/products.actions'
+import { AppState } from '../app.states';
+
 
 
 @Injectable()
 export class ProductEffects {
     constructor(
         private actions: Actions,
+        private store: Store<AppState>,
         private productService: ProductService,
         private router: Router,
     ) {}
@@ -50,6 +53,6 @@ export class ProductEffects {
         ))
     )
     
-
+              
 
 }

@@ -1,46 +1,48 @@
 import { Product } from '../../models/product';
 import { ProductActionTypes, All } from '../actions/products.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { AppState } from '../app.states';
 
 export interface ProductsState {
-    allProducts: [Product] | null
-    product: Product | null
+    products: [Product] | null
+    selectedProduct: Product | null
     error: string | null
 };
 
 export const initialState: ProductsState = {
-    allProducts: null,
-    product: null,
+    products: null,
+    selectedProduct: null,
     error: null
 };
 
 
-export function productReducer(state = initialState, action: All): ProductsState{
-    console.log(state);
+export function reducer(state = initialState, action): ProductsState{
+    //console.log(state);
+    console.log(action.payload);
     
     switch (action.type) {
 
         case ProductActionTypes.GET_PRODUCTS_SUCCESS: {
             return {
                 ...state,
-                allProducts: action.payload,
-                product: null,
+                products: action.payload.products,
+                selectedProduct: null,
                 error: null
             };
         }
         case ProductActionTypes.GET_PRODUCTS_FAILURE: {
             return {
                 ...state,
-                allProducts: null,
-                product: null,
+                products: null,
+                selectedProduct: null,
                 error: 'Failed to load products.'
             };
         }
         case ProductActionTypes.ADD_PRODUCT_SUCCESS: {
             return {
                 ...state,
-                allProducts: action.payload.allProducts,
-                product: action.payload.product,
+                products: action.payload.allProducts,
+                selectedProduct: action.payload.product,
                 error: null
             }
         }
@@ -55,10 +57,5 @@ export function productReducer(state = initialState, action: All): ProductsState
         }
     }
 }
-/*
-const getProducts = createFeatureSelector('allProducts');
 
-export const getAllProductsLocal = createSelector(getProducts, state => state.allProducts);
-export const getAllProductsBd = createSelector(getProducts, state =>
-    state.getProducts);
-*/
+export const getProductsEntities = (state: ProductsState) => state.products

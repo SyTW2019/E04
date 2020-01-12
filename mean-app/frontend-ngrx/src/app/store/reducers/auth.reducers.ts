@@ -3,7 +3,7 @@ import { AuthActionTypes, All } from '../actions/auth.actions';
 import { Enterprise } from 'src/app/models/enterprise';
 
 
-export interface State {
+export interface AuthState {
   // is a user authenticated?
   isAuthenticated: boolean;
   // if authenticated, there should be a user object
@@ -14,7 +14,7 @@ export interface State {
   token: string | null;
 }
 
-export const initialState: State = {
+export const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
   type: null,
@@ -22,7 +22,7 @@ export const initialState: State = {
   token: null,
 };
 
-export function reducer(state = initialState, action: All): State {
+export function reducer(state = initialState, action: All): AuthState {
   console.log(state);
   switch (action.type) {
     
@@ -86,3 +86,5 @@ export function reducer(state = initialState, action: All): State {
     }
   }
 }
+
+export const getUserEntity = (state: AuthState) => state.user

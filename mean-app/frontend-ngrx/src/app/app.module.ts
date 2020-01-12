@@ -59,6 +59,7 @@ import { ProfileComponent } from './components/profile/profile.component';
         strictActionImmutability: true
       }
     }),
+    StoreModule.forFeature('appState', reducers),
     RouterModule.forRoot([
       { path: 'log-in', component: LogInComponent },
       { path: 'sign-up', component: SignUpComponent },
