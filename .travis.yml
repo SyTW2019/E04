@@ -1,30 +1,31 @@
-
 language: node_js
 node_js:
-  - "13.1.0"
+- 13.1.0
 dist: trusty
-sudo: required
-
+sudo: false
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 addons:
   chrome: stable
+  firefox: latest
   sonarcloud:
     organization: "sytw2019"
     token:
-      secure: "YqeWcms1hGO1ozdgADfLsebY7eSzeCC6xYEtYzUlqdvU8AbdqXUjOvEaKkbkDA14pf4WNo7vYN0ueO/f1nnI6gkRY4CVXZ1wZXU7MXb6mKgSWB013kL8qqUpMjQvj1RxBhJz1Sw8VihBCyCbka/0XD4Fn0K/FFgU6ZfiwxQ0N2kfUIrbGg72IGcE6t8sIPfajvt43o1/b3DT2nGV/NH6Zsl7fzvrE0oZqJY6N1th4KoyakYYVEDLeee3Uf+syOIGjmRlfJtpTrgjTJjKJeHwUzNHCsJbXuFkf+pHZvTalJUdCTu2YmQfmXfKnzaGjUvqWtyFZb8+EAeO9ifXmvbK6HENWO77hv32oVG3yuq/sH02pWGqSqNqrdYzka6EXHsSsYehWdMPZJHTe8GUDyu7mq1aL2EbLDeGdJOUqSI3YdqO74nkHEjeVaqN1hGYlatLmSPjfvrdiDCbljdI2Vn/Wk/PbklBKaT/gizj+XSDjk8wgXLvvRSqq+0lhKzw9Wz4Y6R50N3StXVm5NxnfIt1mbjX2RH91i9g43tsqgagJWg8a1dBuEI8YYht3ftX6g1ImOjG2sfq+GFr64c3sRmETDKeypB7pwnVMyQ1gE2xlLp0qapNg3IhkBUvyH5AOITOfmqcJC6VRvv6wpSNwgYBrOLWlpf3iJ4BraUrSnNRjDk="
-script:
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - sonar-scanner -Dsonar.login=$SONAR_TOKEN -Dsonar.password=""
-
-
+       secure: "acp5CGm5F+ToJgYO7EIigmsZGOj1yLV09KDUvEXN7RgFFMHQXbIS7bqRFVxVMS1cvOPTjQdT0kRC4qFa2hBNMFJMqhw++pem1l/7+diDS0VfdJePafosif2lHX3MApNePIZBdMcb9agToWMha5FsCQKCEn7Z0c1zbbD3zX6S48p8IQldpXGy+ztpv9hc3R9kBFzu+OUUC7hc8HZsYvkLGHmWNB+n/u02WTVhDDrcR+Yc2EkZdIiMj/3g5AdKl6MiOGyoA5DyoP+/REJ0NuRfeH3lkkN7P8/UtZSYrhKB0J7uTqcY2fUum8rMpSaqsdKJ+DwNd+yN5Q/BgKGqiUxkLQ+dkq44/zif3Vm6Tba3JnyhgBp3asEL3SZr+81MGUNXtepvIDQye2PQv4PngJXQNgj3jJIn0NV8fWV1WSSfAMkgwu1L7n+7dsdMHEfK2fd0OZ9/TpM9brnEMW3dK7IxmdYIaAJkmc8zDDzLZ5t0fdbwFJrPbnmO62SkOvMQDzNtVXacFi2Cam5FzK5oxD8nOfhGmegQ2eFimiBZZdFLPk1BGf0SFlyJFzPQs+D1m/jt/DCbezkyjcpaf0TeKRGPzscAS0FETsxzgBvbXF+Vg9t2XqV+kOBpwWKnbaD3qqxZw1QTcEpzu76fi6ZgqVjch3HcML/G1qlZZO5ODz9qnuQ="
 before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-install:
-    - npm install codecov -g
-    - npm install
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+before_script:
+  - cd mean-app
+  - cd frontend-ngrx
+script:
+  - npm install codecov -g
+  - npm install
+  - npm audit fix
 
+
+
+  - cd ../../..
+  - sonar-scanner
