@@ -4,14 +4,11 @@ const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator')
 
 let Product = new Schema({
-    code: {
+    name: {
         type: String,
         unique: true,
         required: true,
-        dropDups: true 
-    },
-    name: {
-        type: String
+        dropDups: true
     },
     category: {
         type: String
@@ -20,7 +17,7 @@ let Product = new Schema({
         type: String
     },
     enterprise: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Enterprise'
+        type: mongoose.Schema.Types.String, ref: 'Enterprise'
     },
     users: {
        type: [

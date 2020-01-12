@@ -15,7 +15,9 @@ import { LandingComponent } from './components/landing/landing.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignUp2Component } from './components/sign-up-2/sign-up.component';
 import { AuthService } from './services/auth.service';
+import { ProductService } from './services/product.service';
 import { AuthEffects } from './store/effects/auth.effects';
+import { ProductEffects } from './store/effects/product.effects';
 import {
   TokenInterceptor, ErrorInterceptor
 } from './services/token.interceptor';
@@ -25,6 +27,7 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule, MatGridListModule } from '@angular/material';
+import {MatListModule} from '@angular/material/list';
 import { HomeComponent } from './components/home/home.component';
 import { MatTabsModule } from '@angular/material';
 <<<<<<< HEAD
@@ -33,7 +36,6 @@ import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
 =======
 import { ProfileComponent } from './components/profile/profile.component';
 >>>>>>> 41cce266f5f097ff3fc6773f435b1d835a6ec242
-
 
 
 
@@ -60,13 +62,14 @@ import { ProfileComponent } from './components/profile/profile.component';
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ProductEffects]),
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true
       }
     }),
+    StoreModule.forFeature('appState', reducers),
     RouterModule.forRoot([
       { path: 'log-in', component: LogInComponent },
       { path: 'sign-up', component: SignUpComponent },
@@ -94,10 +97,12 @@ import { ProfileComponent } from './components/profile/profile.component';
     HttpClientModule,
     MatMenuModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatListModule
   ],
   providers: [
     AuthService,
+    ProductService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
