@@ -191,6 +191,10 @@ router.route('/users').get((req, res) => {
   });
 });
 
+router.route('/user').get((req, res) => {
+  User.findOne()
+})
+
 router.get('/products', checkToken, (req, res) => {
   //verify the JWT token generated for the user
   jwt.verify(req.token, 'privatekey', (err, products) => {

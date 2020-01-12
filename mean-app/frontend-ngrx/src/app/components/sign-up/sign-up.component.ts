@@ -31,13 +31,13 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.user);
     const payload = {
       email: this.user.email,
       password: this.user.password,
       nickname: this.user.nickname
     };
     this.store.dispatch(new SignUp(payload));
+    localStorage.setItem('state', JSON.stringify(this.getState)); // This line doesnt know if it works
   }
 
 }

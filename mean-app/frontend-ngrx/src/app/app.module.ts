@@ -27,8 +27,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule, MatGridListModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
 import { MatTabsModule } from '@angular/material';
+<<<<<<< HEAD
 import { RestrictedComponent } from './restricted/restricted.component';
 import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
+=======
+import { ProfileComponent } from './components/profile/profile.component';
+>>>>>>> 41cce266f5f097ff3fc6773f435b1d835a6ec242
 
 
 
@@ -44,8 +48,12 @@ import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
     SignUp2Component,
     StatusComponent,
     HomeComponent,
+<<<<<<< HEAD
     RestrictedComponent,
     UnrestrictedComponent
+=======
+    ProfileComponent
+>>>>>>> 41cce266f5f097ff3fc6773f435b1d835a6ec242
   ],
   imports: [
     BrowserModule,
@@ -65,6 +73,7 @@ import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
       { path: 'sign-up-2', component: SignUp2Component },
       { path: 'status', component: StatusComponent, canActivate: [AuthGuard] },
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
       { path: '', component: LandingComponent },
       { path: '**', redirectTo: '/' }
     ]),
