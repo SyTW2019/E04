@@ -10,11 +10,20 @@
     </mat-form-field>
   <button mat-raised-button (click)="logOut()">Log out</button>
 </mat-toolbar>
+
+
 <mat-card class="register-form" style="width: 18rem;">
   <div class="card-body">
-      <img mat-card-avatar src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">	  
-    <mat-card-title>
-      {{user.email}}
+    <label class="hoverable" for="fileInput">
+      <img  [src]=" url ? url:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'">	  
+      <div class="hover-text">Choose file</div>
+      <div class="background"></div>
+    </label>
+    <input id="fileInput" type='file' (change)="onSelectFile($event)">
+    <button type="button" (click)="onUpload()">Guardar Foto</button>
+<button *ngIf="url" (click)="delete()" >delete</button>
+      <mat-card-title>
+        Tus Datos:
     </mat-card-title>
     <mat-card-content>
       <mat-card-subtitle>

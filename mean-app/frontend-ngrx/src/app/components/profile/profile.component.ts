@@ -5,6 +5,7 @@ import { AppState, selectAuthState, getUser } from 'src/app/store/app.states';
 import { LogOut } from 'src/app/store/actions/auth.actions';
 import { Enterprise } from 'src/app/models/enterprise';
 import { User } from 'src/app/models/user';
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -15,12 +16,14 @@ import { User } from 'src/app/models/user';
 export class ProfileComponent implements OnInit {
   userObs: Observable<Enterprise | User>;
   user: Enterprise | User;
+  url = '';
 
-  constructor(
+  constructor(private http: HttpClient,
     private store: Store<AppState>
   ) {
 
   }
+
 
   ngOnInit() {
     this.userObs = this.store.select(getUser);
@@ -30,5 +33,7 @@ export class ProfileComponent implements OnInit {
   logOut(): void {
     this.store.dispatch(new LogOut);
   }
+
+ 
 
 }

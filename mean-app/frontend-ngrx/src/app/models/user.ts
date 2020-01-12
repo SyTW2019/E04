@@ -4,5 +4,6 @@ export class User {
     password?: string;
     token?: string;
     nickname?: string;
+    
   }
   
