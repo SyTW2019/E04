@@ -16,6 +16,19 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  getSesion(): string {
+    return localStorage.getItem('sesion');
+  }
+  
+  getUser(): string {
+    return localStorage.getItem('user');
+  }
+
+  getUserDb(): Observable<User> {
+    const url = `${this.BASE_URL}/user`;
+    return this.http.get<User>(url);
+  }
+
   logIn(email: string, password: string): Observable<any> {
     const url = `${this.BASE_URL}/login`;
     return this.http.post(url, {email, password});

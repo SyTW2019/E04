@@ -15,7 +15,9 @@ import { LandingComponent } from './components/landing/landing.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignUp2Component } from './components/sign-up-2/sign-up.component';
 import { AuthService } from './services/auth.service';
+import { ProductService } from './services/product.service';
 import { AuthEffects } from './store/effects/auth.effects';
+import { ProductEffects } from './store/effects/product.effects';
 import {
   TokenInterceptor, ErrorInterceptor
 } from './services/token.interceptor';
@@ -25,11 +27,13 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule, MatGridListModule } from '@angular/material';
+import {MatListModule} from '@angular/material/list';
 import { HomeComponent } from './components/home/home.component';
 import { MatTabsModule } from '@angular/material';
 import { RestrictedComponent } from './restricted/restricted.component';
 import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
 
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 
@@ -44,27 +48,33 @@ import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
     SignUp2Component,
     StatusComponent,
     HomeComponent,
+<<<<<<< HEAD
     RestrictedComponent,
     UnrestrictedComponent
+=======
+    ProfileComponent
+>>>>>>> desarrollo2
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ProductEffects]),
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true
       }
     }),
+    StoreModule.forFeature('appState', reducers),
     RouterModule.forRoot([
       { path: 'log-in', component: LogInComponent },
       { path: 'sign-up', component: SignUpComponent },
       { path: 'sign-up-2', component: SignUp2Component },
       { path: 'status', component: StatusComponent, canActivate: [AuthGuard] },
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
       { path: '', component: LandingComponent },
       { path: '**', redirectTo: '/' }
     ]),
@@ -85,10 +95,12 @@ import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
     HttpClientModule,
     MatMenuModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatListModule
   ],
   providers: [
     AuthService,
+    ProductService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

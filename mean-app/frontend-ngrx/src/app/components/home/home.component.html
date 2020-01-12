@@ -1,5 +1,4 @@
 <mat-toolbar class="navbar">
-  
     <button mat-raised-button [routerLink]="['/home']">Home</button>
     <button mat-raised-button [routerLink]="['/profile']" >Profile</button>
     <router-outlet></router-outlet>
@@ -11,3 +10,48 @@
       </mat-form-field>
       <button mat-raised-button (click)="logOut()">Log out</button>
 </mat-toolbar>
+<mat-card class="home-card">
+  <div class="card-body">
+      <img mat-card-avatar src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">	  
+    <mat-card-title>
+      Post your product
+    </mat-card-title>
+    <form (ngSubmit)="addProduct()" class="add-product-form" ngNativeValidate>
+      <mat-form-field class="field-full-width">
+          <input matInput placeholder="name" 
+          [(ngModel)]="name"
+          required
+          name="name"
+          id="name"
+          #ngModel>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="field-full-width">
+          <textarea type ="description" matInput placeholder="description"
+          [(ngModel)]="description"
+          required
+          name="description"
+          id="description"
+          #ngModel>
+          </textarea>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button type="submit" class="btn btn-primary" color="primary">Submit</button>
+      <a mat-raised-button [routerLink]="['/']" class="btn btn-success">Cancel</a>
+    </form>
+  </div>
+</mat-card>
+<mat-list>
+  <mat-list-item *ngFor="let product of products | async">
+    <mat-card class="home-card">
+      <div class="card-body">
+        <mat-card-title>
+          {{product.name}}
+        </mat-card-title>
+        <h3>
+          {{product.description}}
+        </h3>
+      </div>
+    </mat-card>
+  </mat-list-item>
+</mat-list>
