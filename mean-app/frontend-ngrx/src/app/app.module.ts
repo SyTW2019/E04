@@ -48,12 +48,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     SignUp2Component,
     StatusComponent,
     HomeComponent,
-<<<<<<< HEAD
     RestrictedComponent,
-    UnrestrictedComponent
-=======
+    UnrestrictedComponent,
     ProfileComponent
->>>>>>> desarrollo2
   ],
   imports: [
     BrowserModule,
