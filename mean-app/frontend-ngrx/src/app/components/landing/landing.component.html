@@ -1,12 +1,9 @@
-<!--Navbar-->
-
 <mat-toolbar color="primary">
   <mat-toolbar-row >    
     <mat-icon>language</mat-icon>
     <span><h1 href="/">MANG</h1></span> 
     <span class="space"></span>
     <a #doSomethingElse [routerLink]="['/log-in']" mat-button class="btn btn-other btn-lg" ><mat-icon>account_circle</mat-icon>  Log in</a>
-    <button #doSomething class="btn btn-primary" (click)="logOut()">Log out</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -25,10 +22,6 @@
   <div class="h-100 row align-items-center">        
     <div *ngIf="isAuthenticated; then doSomething; else doSomethingElse;">
     </div>        
-    <ng-template #doSomething>
-      <p>You logged in <em>{{user.email}}!</em></p>
-      <button class="btn btn-primary" (click)="logOut()">Log out</button>
-    </ng-template>
     <ng-template #doSomethingElse>
       <div class="col-md-4">
         <a [routerLink]="['/sign-up']" mat-raised-button class="btn btn-common btn-lg" color="primary">Influencer</a>
