@@ -12,11 +12,13 @@ export enum AuthActionTypes {
   SIGNUP_SUCCESS2 = '[Auth] Signup Success2',
   SIGNUP_FAILURE2 = '[Auth] Signup Failure2',
   LOGOUT = '[Auth] Logout',
-  GET_STATUS = '[Auth] GetStatus'
+  GET_STATUS = '[Auth] GetStatus',
+  GET_USER_STORAGE = '[Auth] Get User from storage'
 }
 
 export class LogIn implements Action {
   readonly type = AuthActionTypes.LOGIN;
+  
   constructor(public payload: any) {}
 }
 
@@ -68,6 +70,10 @@ export class GetStatus implements Action {
   readonly type = AuthActionTypes.GET_STATUS;
 }
 
+export class GetUserStorage implements Action {
+  readonly type = AuthActionTypes.GET_USER_STORAGE;
+}
+
 export type All =
   | LogIn
   | LogInSuccess
@@ -79,4 +85,5 @@ export type All =
   | SignUpSuccess2
   | SignUpFailure2
   | LogOut
-  | GetStatus;
+  | GetStatus
+  | GetUserStorage;

@@ -1,19 +1,20 @@
 import { User } from '../../models/user';
 import { AuthActionTypes, All } from '../actions/auth.actions';
+import { Enterprise } from 'src/app/models/enterprise';
 
 
-export interface State {
+export interface AuthState {
   // is a user authenticated?
   isAuthenticated: boolean;
   // if authenticated, there should be a user object
-  user: User | null;
+  user: User | Enterprise | null;
   type: null;
   // error message
   errorMessage: string | null;
   token: string | null;
 }
 
-export const initialState: State = {
+export const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
   type: null,
@@ -21,8 +22,9 @@ export const initialState: State = {
   token: null,
 };
 
-export function reducer(state = initialState, action: All): State {
+export function reducer(state = initialState, action: All): AuthState {
   console.log(state);
+  console.log('reducer')
   switch (action.type) {
     
     case AuthActionTypes.LOGIN_SUCCESS: {
@@ -81,7 +83,23 @@ export function reducer(state = initialState, action: All): State {
       return initialState;
     }
     default: {
+      // This retrieve info from database if is lost and there is
+      if(state.user == null && localStorage.getItem('user') !== null){
+        return {
+          ...state,
+          isAuthenticated: (localStorage.getItem('user') !== null),
+          user: {
+            email: localStorage.getItem('user')
+          },
+          errorMessage: 'user retrieve from database',
+          token: localStorage.getItem('token')
+        }
+      }
       return state;
     }
   }
 }
+
+export const getUserEntity = (state: AuthState) => state.user;
+
+export const getUserFromLocalstorage = (state: AuthState) => localStorage.getItem('user');
