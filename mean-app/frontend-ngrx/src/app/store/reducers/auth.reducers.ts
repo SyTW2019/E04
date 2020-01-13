@@ -84,8 +84,7 @@ export function reducer(state = initialState, action: All): AuthState {
     }
     default: {
       // This retrieve info from database if is lost and there is
-      if(state.user == null){
-        if(localStorage.getItem('user') !== null){
+      if(state.user == null && localStorage.getItem('user') !== null){
         return {
           ...state,
           isAuthenticated: (localStorage.getItem('user') !== null),
@@ -95,7 +94,6 @@ export function reducer(state = initialState, action: All): AuthState {
           errorMessage: 'user retrieve from database',
           token: localStorage.getItem('token')
         }
-      }
       }
       return state;
     }
