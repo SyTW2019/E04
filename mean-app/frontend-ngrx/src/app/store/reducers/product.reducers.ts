@@ -17,8 +17,7 @@ export const initialState: ProductsState = {
 
 
 export function reducer(state = initialState, action): ProductsState{
-    //console.log(state);
-    console.log(action.payload);
+    console.log(state);
     
     switch (action.type) {
 

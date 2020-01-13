@@ -132,4 +132,11 @@ export class AuthEffects {
       return this.authService.getStatus();
     }));
 
+  @Effect({ dispatch: false })
+  GetUserStorage: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.GET_USER_STORAGE)).pipe(
+    switchMap(payload => {
+      return this.authService.getUser();
+    }));
+    
 } 

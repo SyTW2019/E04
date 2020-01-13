@@ -12,7 +12,6 @@ export enum ProductActionTypes {
 export class AddProduct implements Action {
     readonly type = ProductActionTypes.ADD_PRODUCT;
     constructor(public payload: any) {
-        console.log("action.payload " + payload);
     }
 }
 
