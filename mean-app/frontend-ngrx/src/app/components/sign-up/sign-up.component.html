@@ -1,0 +1,54 @@
+<body>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row >    
+        <mat-icon>language</mat-icon>
+        <span><h1 href="/">MANG</h1></span> 
+        
+      </mat-toolbar-row>
+    </mat-toolbar>
+  
+  <mat-card class="register-form">
+    <img  src="assets/img/avatar.png" class="avatar">
+    <h2>Sign up</h2>
+    <form (ngSubmit)="onSubmit()" class="create-form" >
+      <p>Username</p>
+      <input type ="text" matInput placeholder="Enter Username"
+              [(ngModel)]="user.nickname"
+              required
+              name="nickname"
+              id="nickname"
+              #nickname>
+      <p>Email</p>
+      <input type ="text" matInput placeholder="Enter Email" 
+              [(ngModel)]="user.email"
+              required
+              name="email"
+              id="email"
+              #email>
+      <p>Password</p>
+      <input type ="password" matInput placeholder="Enter Password"
+              [(ngModel)]="user.password"
+              required
+              name="password"
+              id="password"
+              #password>
+         
+      <input type="submit" name="submit" value="Sign up">
+      <p>Already have an account?
+      <a [routerLink]="['/log-in']">Log in</a></p>
+    </form>
+    
+    <br><br>
+    
+    <div *ngIf="errorMessage">
+      <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
+    </div>
+  
+    <br>
+    
+    <button mat-raised-button [routerLink]="['/']" class="btn btn-success">Cancel</button>   
+  </mat-card>
+  
+  </body>
