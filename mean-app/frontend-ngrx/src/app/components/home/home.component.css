@@ -1,0 +1,16 @@
+.navbar{
+    color: grey;
+    align-content: center;
+}
+
+.search-bar{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home-card {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5em;
+    width: 50%;
+}

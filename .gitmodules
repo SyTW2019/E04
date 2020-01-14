@@ -1,3 +1,0 @@
-[submodule "fake-token-api"]
-	path = fake-token-api
-	url = https://github.com/testdrivenio/fake-token-api.git

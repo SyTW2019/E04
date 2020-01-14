@@ -1,0 +1,31 @@
+<mat-toolbar class="navbar">
+  <button mat-raised-button [routerLink]="['/home']">Home</button>
+  <button mat-raised-button [routerLink]="['/profile']" >Profile</button>
+  <router-outlet></router-outlet>
+    <mat-form-field class="search-bar">
+      <input matInput type="text" placeholder="Search" [(ngModel)]="searchValue">
+      <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  <button mat-raised-button (click)="logOut()">Log out</button>
+</mat-toolbar>
+<mat-card class="register-form" style="width: 18rem;">
+  <div class="card-body">
+      <img mat-card-avatar src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">	  
+    <mat-card-title>
+      {{user.email}}
+    </mat-card-title>
+    <mat-card-content>
+      <mat-card-subtitle>
+        Email: {{user.email}}
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        Name: {{user.name}}
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        Nickname: {{user.nickname}}
+      </mat-card-subtitle>
+    </mat-card-content>
+  </div>
+</mat-card>

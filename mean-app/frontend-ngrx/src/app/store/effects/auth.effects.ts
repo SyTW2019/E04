@@ -33,7 +33,7 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.logIn(payload.email, payload.password).pipe(
         map((user) => {
-          return new LogInSuccess({token: user.token, email: payload.email});
+          return new LogInSuccess({token: user.token, email: payload.email, type: user.type});
         })).pipe(
         catchError((error) => {
           return of(new LogInFailure({ error: error }));
@@ -46,7 +46,8 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap((user) => {
       localStorage.setItem('token', user.payload.token);
-      this.router.navigateByUrl('/');
+      localStorage.setItem('user', user.payload.email);
+      this.router.navigateByUrl('/home');
     })
   );
 
@@ -60,7 +61,6 @@ export class AuthEffects {
     ofType(AuthActionTypes.SIGNUP)).pipe(
     map((action: SignUp) => action.payload)).pipe(
     switchMap(payload => {
-      console.log(payload);
       return this.authService.signUp(payload.email, payload.password, payload.nickname).pipe(
         map((user) => {
           return new SignUpSuccess({token: user.token, email: payload.email});
@@ -69,14 +69,15 @@ export class AuthEffects {
           return of(new SignUpFailure({ error: error }));
         }));
     }));
+    
 
   @Effect({ dispatch: false })
   SignUpSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.SIGNUP_SUCCESS),
     tap((user) => {
-      console.log(user);
       localStorage.setItem('token', user.payload.token);
-      this.router.navigateByUrl('/');
+      localStorage.setItem('user', user.payload.email);
+      this.router.navigateByUrl('/home');
     })
   );
 
@@ -87,32 +88,31 @@ export class AuthEffects {
 
   @Effect()
   SignUp2: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.SIGNUP)).pipe(
-    map((action: SignUp) => action.payload)).pipe(
+    ofType(AuthActionTypes.SIGNUP2)).pipe(
+    map((action: SignUp2) => action.payload)).pipe(
     switchMap(payload => {
-      console.log(payload);
-      return this.authService.signUp(payload.email, payload.password, payload.nickname).pipe(
+      return this.authService.signUp2(payload.email, payload.password, payload.nickname, payload.address, payload.enterprise, payload.cif).pipe(
         map((user) => {
-          return new SignUpSuccess({token: user.token, email: payload.email});
+          return new SignUpSuccess2({token: user.token, email: payload.email});
         })).pipe(
         catchError((error) => {
-          return of(new SignUpFailure({ error: error }));
+          return of(new SignUpFailure2({ error: error }));
         }));
     }));
 
   @Effect({ dispatch: false })
   SignUpSuccess2: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.SIGNUP_SUCCESS),
+    ofType(AuthActionTypes.SIGNUP_SUCCESS2),
     tap((user) => {
-      console.log(user);
       localStorage.setItem('token', user.payload.token);
+      localStorage.setItem('user', user.payload.email);
       this.router.navigateByUrl('/');
     })
   );
 
   @Effect({ dispatch: false })
   SignUpFailure2: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.SIGNUP_FAILURE)
+    ofType(AuthActionTypes.SIGNUP_FAILURE2)
   );
 
   @Effect({ dispatch: false })
@@ -120,6 +120,8 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      this.router.navigateByUrl('/');
     })
   );
 
@@ -130,4 +132,11 @@ export class AuthEffects {
       return this.authService.getStatus();
     }));
 
-}
+  @Effect({ dispatch: false })
+  GetUserStorage: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.GET_USER_STORAGE)).pipe(
+    switchMap(payload => {
+      return this.authService.getUser();
+    }));
+    
+} 

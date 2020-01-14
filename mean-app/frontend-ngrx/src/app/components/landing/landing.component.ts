@@ -6,6 +6,8 @@ import { AppState, selectAuthState } from '../../store/app.states';
 import { LogOut } from '../../store/actions/auth.actions';
 
 
+
+
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -18,6 +20,7 @@ export class LandingComponent implements OnInit {
   user = null;
   token = null;
   errorMessage = null;
+  type = null;
 
   constructor(
     private store: Store<AppState>
@@ -31,6 +34,7 @@ export class LandingComponent implements OnInit {
       this.user = state.user;
       this.token = state.token;
       this.errorMessage = state.errorMessage;
+      this.type = state.type;
     });
   }
 

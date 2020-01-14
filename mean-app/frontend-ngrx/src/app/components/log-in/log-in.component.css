@@ -1,23 +1,92 @@
 .login-form {
-    min-width: 150px;
+    width: 320px;
+    height: 500px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 60px 30px;
+}
+
+.login-form p{
+    margin: 0;
+    padding: 0;
+}
+
+.login-form input{
     width: 100%;
+    margin-bottom: 20px;
 }
 
-.field-full-width {
-    width: 90%;
+.login-form input[type="text"], input[type="password"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
 }
 
+.login-form input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #176fad;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
 
-.login-form {
-    width: 40%;
-    vertical-align: center;
+.login-form a{
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(119, 195, 214);
+}
+
+body {
+   
+    margin: 0;
+    padding: 0;
+    background: url(../../../assets/img/influencers.jpg);
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+  
+}
+
+  h2{
+    margin: 0;
+    padding: 0 0 20px;
     text-align: center;
-    align-content: center;
-    margin-left: auto;
-    margin-right: auto; 
-    margin-top: 20em;  
+    font-size: 22px;
 }
 
-.card-header {
-    background-color: green;
+.avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+
+.mat-toolbar.mat-primary {
+    background: rgb(21, 25, 37);
+    color: #fff;
+  }
+
+.alert-danger{
+    color: rgb(211, 24, 24);
+}
+
+.btn-success {
+    float:none;
+    text-align:center;
 }
