@@ -72,7 +72,7 @@ import { ProfileComponent } from './components/profile/profile.component';
       { path: 'status', component: StatusComponent, canActivate: [AuthGuard] },
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-      { path: '', component: LandingComponent },
+      { path: 'land', component: LandingComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: '/' }
     ]),
     ReactiveFormsModule,
