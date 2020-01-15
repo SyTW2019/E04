@@ -1,18 +1,42 @@
+<body>
 <mat-toolbar class="navbar">
-    <button mat-raised-button [routerLink]="['/home']">Home</button>
+
+  <mat-toolbar-row>
+          
+    <mat-icon>favorite</mat-icon>
+     <span><h1 href="/">LOGO NAME</h1></span>
+     <span class="space"></span>
+
+     <mat-form-field class="search-bar">
+      <input matInput type="text" placeholder="Search" [(ngModel)]="searchValue">
+      <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+  
+        
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+     <span class="space"></span>
+     
+    <button mat-raised-button [routerLink]="['/home']" checked>Home</button>
     <button mat-raised-button [routerLink]="['/profile']" >Profile</button>
     <router-outlet></router-outlet>
-      <mat-form-field class="search-bar">
-        <input matInput type="text" placeholder="Search" [(ngModel)]="searchValue">
-        <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+    
       <button mat-raised-button (click)="logOut()">Log out</button>
+    </mat-toolbar-row>
+
+
+
 </mat-toolbar>
+
+
+ 
+
+
+
+
 <mat-card class="home-card">
   <div class="card-body">
-      <img mat-card-avatar src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">	  
+       
     <mat-card-title>
       Post your product
     </mat-card-title>
@@ -41,17 +65,22 @@
     </form>
   </div>
 </mat-card>
+
 <mat-list>
   <mat-list-item *ngFor="let product of products | async">
-    <mat-card class="home-card">
+    <mat-card class="card-product">
       <div class="card-body">
         <mat-card-title>
-          {{product.name}}
+          Products You Have Added !
+          
         </mat-card-title>
         <h3>
-          {{product.description}}
+          {{product.name}}
+          
         </h3>
+        <p>{{product.description}}</p>
       </div>
     </mat-card>
   </mat-list-item>
 </mat-list>
+</body>
