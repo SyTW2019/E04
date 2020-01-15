@@ -33,10 +33,7 @@ import { HomeComponent } from './components/home/home.component';
 import { MatTabsModule } from '@angular/material';
 import { RestrictedComponent } from './restricted/restricted.component';
 import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 import { ProfileComponent } from './components/profile/profile.component';
 
 
@@ -53,12 +50,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     StatusComponent,
     HomeComponent,
     RestrictedComponent,
-<<<<<<< HEAD
-    UnrestrictedComponent
-=======
+    
     UnrestrictedComponent,
     ProfileComponent
->>>>>>> master
   ],
   imports: [
     BrowserModule,
