@@ -39,3 +39,8 @@ export const getUser = createSelector(
   selectAuthState,
   auth.getUserEntity
 )
+
+export const getUserLocalStorage = createSelector(
+  selectAuthState,
+  auth.getUserFromLocalstorage
+)

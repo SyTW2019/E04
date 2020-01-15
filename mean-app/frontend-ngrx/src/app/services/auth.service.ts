@@ -13,18 +13,23 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   getToken(): string {
+    console.log("token from localstorage: " +localStorage.getItem('token'));
     return localStorage.getItem('token');
   }
 
   getSesion(): string {
+    console.log("sesion from localstorage: " +localStorage.getItem('sesion'));
     return localStorage.getItem('sesion');
   }
   
   getUser(): string {
+    console.log("user from localstorage: " + localStorage.getItem('user'));
     return localStorage.getItem('user');
   }
-
-  getUserDb(): Observable<User> {
+  
+  getUserDb(email: string): Observable<User> {
+    //let params = new HttpParams();
+    //params.append('email', email);
     const url = `${this.BASE_URL}/user`;
     return this.http.get<User>(url);
   }

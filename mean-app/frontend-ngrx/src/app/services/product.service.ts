@@ -19,6 +19,7 @@ export class ProductService{
     addProduct(product : Product): Observable<Product> {
         // console.log("SERVICE: name: "+ name + " description: " + description);
         // También podría pasar como parámetro uno de tipo producto y cambiar el backend
+        // Coger en el backend de
         console.log(product)
         let name = product.name;
         let description = product.description;

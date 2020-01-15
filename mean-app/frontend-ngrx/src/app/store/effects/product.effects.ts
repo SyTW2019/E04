@@ -31,7 +31,6 @@ export class ProductEffects {
         ofType(ProductActionTypes.ADD_PRODUCT)).pipe(
             map((action: AddProduct) => action.payload)).pipe(
                 switchMap(payload => {
-                    console.log("payload: name: " + payload.name + " description: "+ payload.description + " user: "+ payload.enterprise);
                     return this.productService.addProduct(payload).pipe(
                         map((product) => {
                     return new AddProductSuccess({msg: 'Product added succesfully'});
