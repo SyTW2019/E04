@@ -190,11 +190,27 @@ router.route('/users').get((req, res) => {
       res.json(users);
   });
 });
-/*
-router.route('/user').get((req, res) => {
-  User.findOne()
+
+router.route('/user').post((req, res) => {
+  console.log('Hola mundo!')
+  //If token is successfully verified, we can send the autorized data 
+  mongooose.connect(url);
+  const connection = mongooose.connection;
+  let email = req.body.email;
+  console.log(req.body);
+  console.log(email);
+  User.findOne({"email": {$regex : ".*" + email + ".*"}},(err, user) => {
+    if(err) {
+      console.log(err)
+    }else{
+      res.json({
+        message: 'user returned',
+        user
+      });
+    }
+  })
 })
-*/
+
 
 router.get('/products', checkToken, (req, res) => {
   //verify the JWT token generated for the user
@@ -220,6 +236,39 @@ router.get('/products', checkToken, (req, res) => {
       )
     }
   });
+})
+
+router.post('/products-filter', checkToken, (req, res) => {
+  console.log("entra");
+  // verify the JWT token generated for the user
+  jwt.verify(req.token, 'privatekey', (err, ) =>{
+    if(err){
+      //If error send Forbidden (403)
+      console.log('ERROR: Could not connect to the protected route');
+      res.sendStatus(403);
+    } else {
+      mongooose.connect(url);
+      const connection = mongooose.connection;
+      let filter = req.body.filter;
+      console.log(filter);
+      let filterRegex = '".*'+ filter +'.*"';
+      console.log(filter);
+
+      Product.find(
+        {"name": {$regex : ".*" + filter + ".*"}}
+      , (err, products) => {
+        if(err) {
+          console.log(err)
+        }else{
+          console.log(products);
+          res.json({
+            message: 'products returned',
+            products
+          });
+        }
+      });
+    }
+  })
 })
 
 router.route('/add-product').post((req, res, next) => {
