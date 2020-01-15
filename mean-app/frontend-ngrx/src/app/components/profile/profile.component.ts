@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AppState, selectAuthState, getUser } from 'src/app/store/app.states';
-import { LogOut } from 'src/app/store/actions/auth.actions';
+import { Observable } from 'rxjs';
 import { Enterprise } from 'src/app/models/enterprise';
 import { User } from 'src/app/models/user';
+import { GetUserBd, LogOut } from 'src/app/store/actions/auth.actions';
+import { AppState, getUser } from 'src/app/store/app.states';
+import { AuthEffects } from 'src/app/store/effects/auth.effects';
 
 
 @Component({
@@ -13,18 +14,21 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  userObs: Observable<Enterprise | User>;
+  getState: Observable<any>;
+  userObs: Observable<any>;
   user: Enterprise | User;
 
   constructor(
+    private effect : AuthEffects,
     private store: Store<AppState>
   ) {
-
+    
   }
 
   ngOnInit() {
     this.userObs = this.store.select(getUser);
-    this.userObs.subscribe(user => this.user = user);
+    this.userObs.subscribe(user =>{this.user = user.user});
+    this.store.dispatch(new GetUserBd(this.user.email));
   }
 
   logOut(): void {

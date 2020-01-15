@@ -1,11 +1,11 @@
 <mat-toolbar class="navbar">
     <button mat-raised-button [routerLink]="['/home']">Home</button>
-    <button mat-raised-button [routerLink]="['/profile']" >Profile</button>
+    <button mat-raised-button (click)="getProfile()" >Profile</button>
     <router-outlet></router-outlet>
       <mat-form-field class="search-bar">
-        <input matInput type="text" placeholder="Search" [(ngModel)]="searchValue">
-        <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
-          <mat-icon>close</mat-icon>
+        <input matInput type="text" placeholder="Search" [(ngModel)]="filter">
+        <button mat-button *ngIf="filter" matSuffix mat-icon-button aria-label="submit" (click)="getProductsFilter()">
+          <mat-icon>submit</mat-icon>
         </button>
       </mat-form-field>
       <button mat-raised-button (click)="logOut()">Log out</button>
@@ -44,14 +44,13 @@
 <mat-list>
   <mat-list-item *ngFor="let product of products | async">
     <mat-card class="home-card">
-      <div class="card-body">
         <mat-card-title>
           {{product.name}}
         </mat-card-title>
-        <h3>
+        <mat-card-subtitle>
           {{product.description}}
-        </h3>
-      </div>
+        </mat-card-subtitle>
     </mat-card>
+    <br>
   </mat-list-item>
 </mat-list>

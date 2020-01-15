@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
-import { AppState, selectUser, selectProducts, selectAuthState, getAppState, getProducts, getUser } from '../../store/app.states';
-import { LogOut } from '../../store/actions/auth.actions';
-import { Product } from '../../models/product';
-import { GetProducts, AddProduct } from 'src/app/store/actions/products.actions';
 import { Enterprise } from 'src/app/models/enterprise';
 import { User } from 'src/app/models/user';
-import { map } from 'rxjs/operators';
-import { ProductsState } from 'src/app/store/reducers/product.reducers';
+import { AddProduct, GetProductFilter, GetProducts } from 'src/app/store/actions/products.actions';
+import { Product } from '../../models/product';
+import { GetUserBd, LogOut } from '../../store/actions/auth.actions';
+import { AppState, getProducts, getUser } from '../../store/app.states';
 
 
 @Component({
@@ -25,9 +23,11 @@ export class HomeComponent implements OnInit {
   products: Observable<[Product]>;
   name: string;
   description: string;
+  filter: string;
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router : Router
   ) {
   }
 
@@ -36,8 +36,9 @@ export class HomeComponent implements OnInit {
    this.userObs = this.store.select(getUser);
    this.userObs.subscribe(user => this.user = user);
    console.log('user');
+   // this.store.dispatch(new GetUserStorage());
    this.products = this.store.select(getProducts);
-   console.log(this.products);
+   // console.log(this.products);
 
   }
 
@@ -54,10 +55,24 @@ export class HomeComponent implements OnInit {
     let payload = new Product();
     payload.name = this.name;
     payload.description = this.description;
-    payload.enterprise = this.user.id;
+    payload.enterprise = this.user.email;
     payload.category =  "no category";
     // console.log("component payload: " + payload.name + " " + payload.description + " " + payload.enterprise);
     this.store.dispatch(new AddProduct(payload));
+    this.store.dispatch(new GetProducts());
+    this.products = this.store.select(getProducts);
     window.location.reload();
+  }
+
+  getProductsFilter(): void {
+    let payload = this.filter;
+    this.store.dispatch(new GetProductFilter(payload));
+    // this.products = this.store.select(getProducts);
+    //console.log(this.products);
+  }
+
+  getProfile(): void {
+    this.store.dispatch(new GetUserBd(this.user.email));
+    this.router.navigateByUrl('/profile');
   }
 }

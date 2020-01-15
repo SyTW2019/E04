@@ -1,20 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';  
-import { switchMap, map, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { tap } from 'rxjs/operators';
-
+import { Observable, of } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
-import {
-  AuthActionTypes,
-  LogIn, LogInSuccess, LogInFailure,
-  SignUp, SignUpSuccess, SignUpFailure,
-  SignUp2, SignUpSuccess2, SignUpFailure2,
-  LogOut,
-} from '../actions/auth.actions';
+import { AuthActionTypes, GetUserBd, GetUserBdSuccess, LogIn, LogInFailure, LogInSuccess, LogOut, SignUp, SignUp2, SignUpFailure, SignUpFailure2, SignUpSuccess, SignUpSuccess2 } from '../actions/auth.actions';
+
 
 
 @Injectable()
@@ -131,12 +122,48 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.getStatus();
     }));
-
+/*
   @Effect({ dispatch: false })
   GetUserStorage: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.GET_USER_STORAGE)).pipe(
-    switchMap(payload => {
-      return this.authService.getUser();
-    }));
-    
+    ofType(AuthActionTypes.GET_USER_STORAGE),
+    tap((action) => {
+      console.log("Aqui entra");
+      // console.log(action.payload.email);
+      console.log(action);
+      console.log("hola");
+      return new GetUserStorageSuccess({user: this.authService.getUserDb(action.payload)});
+    })
+  );
+  */
+ @Effect()
+ GetUserStorage: Observable<any> = this.actions.pipe(
+   ofType(AuthActionTypes.GET_USER_STORAGE)).pipe(
+    map((action: GetUserBd) => action.payload)).pipe(
+      switchMap(payload => {
+        console.log("payload effect: " + payload);
+        return this.authService.getUserDb(payload).pipe(
+          map((user) => {
+            console.log("hola k ase");
+            return new GetUserBdSuccess({user: user});
+          })
+        ).pipe(
+          catchError((error) => {
+            console.log(error);
+            return of(new LogOut());
+          })
+        )
+      })
+    )
+  
+  
+  GetUserStorageSuccess:  Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.GET_USER_STORAGE_SUCCESS),
+    tap((user) => {
+      console.log("por favor");
+      console.log(user.payload.user);
+      localStorage.setItem('user', user.payload.user);
+      console.log('locale')
+      // this.router.navigateByUrl('/profile');
+    })
+  );
 } 

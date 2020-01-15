@@ -13,7 +13,9 @@ export enum AuthActionTypes {
   SIGNUP_FAILURE2 = '[Auth] Signup Failure2',
   LOGOUT = '[Auth] Logout',
   GET_STATUS = '[Auth] GetStatus',
-  GET_USER_STORAGE = '[Auth] Get User from storage'
+  GET_USER_STORAGE = '[Auth] Get User from storage',
+  GET_USER_STORAGE_SUCCESS = '[Auth] Get User success',
+  ofType = "ofType"
 }
 
 export class LogIn implements Action {
@@ -70,8 +72,17 @@ export class GetStatus implements Action {
   readonly type = AuthActionTypes.GET_STATUS;
 }
 
-export class GetUserStorage implements Action {
+export class GetUserBd implements Action {
   readonly type = AuthActionTypes.GET_USER_STORAGE;
+  constructor(public payload: any) {
+    console.log("Get User Storage entry")
+  }
+}
+
+export class GetUserBdSuccess implements Action {
+  readonly type = AuthActionTypes.GET_USER_STORAGE_SUCCESS;
+  constructor(public payload: any) {
+  }
 }
 
 export type All =
@@ -86,4 +97,5 @@ export type All =
   | SignUpFailure2
   | LogOut
   | GetStatus
-  | GetUserStorage;
+  | GetUserBd
+  | GetUserBdSuccess;

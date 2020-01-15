@@ -6,7 +6,8 @@ export enum ProductActionTypes {
     ADD_PRODUCT_SUCCESS = '[Product] Add products SUCCESS',
     GET_PRODUCTS = '[Product] Get all products',
     GET_PRODUCTS_FAILURE = '[Product] Get all products failure',
-    GET_PRODUCTS_SUCCESS = '[Product] Get all products success'
+    GET_PRODUCTS_SUCCESS = '[Product] Get all products success',
+    GET_PRODUCTS_FILTER = '[Product] Get products filter'
 }
 
 export class AddProduct implements Action {
@@ -40,10 +41,16 @@ export class GetProductsSuccess implements Action {
     constructor(public payload: any) {}
 }
 
+export class GetProductFilter implements Action {
+    readonly type = ProductActionTypes.GET_PRODUCTS_FILTER;
+    constructor(public payload: any) {}
+}
+
 export type All =
     | AddProduct
     | AddProductFailure
     | AddProductSuccess
     | GetProducts
     | GetProductsFailure
-    | GetProductsSuccess;
+    | GetProductsSuccess
+    | GetProductFilter;

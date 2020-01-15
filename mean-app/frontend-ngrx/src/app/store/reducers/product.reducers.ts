@@ -1,7 +1,5 @@
 import { Product } from '../../models/product';
-import { ProductActionTypes, All } from '../actions/products.actions';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from '../app.states';
+import { ProductActionTypes } from '../actions/products.actions';
 
 export interface ProductsState {
     products: [Product] | null
@@ -40,7 +38,7 @@ export function reducer(state = initialState, action): ProductsState{
         case ProductActionTypes.ADD_PRODUCT_SUCCESS: {
             return {
                 ...state,
-                products: action.payload.allProducts,
+                products: action.payload.products,
                 selectedProduct: action.payload.product,
                 error: null
             }
@@ -49,6 +47,14 @@ export function reducer(state = initialState, action): ProductsState{
             return {
                 ...state,
                 error: 'Failed to add new product.'
+            }
+        }
+        case ProductActionTypes.GET_PRODUCTS_FILTER: {
+            return {
+                ...state,
+                products: action.payload.products,
+                selectedProduct: null,
+                error: null
             }
         }
         default: {

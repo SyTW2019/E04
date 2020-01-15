@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-import { User } from '../models/user';
 import { Enterprise } from '../models/enterprise';
+import { User } from '../models/user';
+
 
 
 @Injectable()
@@ -26,12 +26,26 @@ export class AuthService {
     console.log("user from localstorage: " + localStorage.getItem('user'));
     return localStorage.getItem('user');
   }
+
+  getState(): any {
+    console.log('get state from localStorage');
+    let user = this.getUser();
+    let token = this.getToken();
+    console.log('user: ' + user + ' token: ' + token);
+    if (user !== null && token !== null){
+      let userEntity = new User();
+      userEntity.email = user;
+      return {user: userEntity, token: token}
+    }
+    return null;
+  }
   
   getUserDb(email: string): Observable<User> {
     //let params = new HttpParams();
     //params.append('email', email);
+    console.log('getUserdb: '+ email);
     const url = `${this.BASE_URL}/user`;
-    return this.http.get<User>(url);
+    return this.http.post<User>(url,{email: email});
   }
 
   logIn(email: string, password: string): Observable<any> {

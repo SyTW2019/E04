@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
 import { Enterprise } from '../../models/enterprise';
+import { SignUp2 } from '../../store/actions/auth.actions';
 import { AppState, selectAuthState } from '../../store/app.states';
-import { SignUp, SignUp2 } from '../../store/actions/auth.actions';
+
 
 
 @Component({

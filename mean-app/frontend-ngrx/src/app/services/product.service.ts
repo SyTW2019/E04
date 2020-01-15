@@ -29,4 +29,9 @@ export class ProductService{
         return this.http.post(url, {name, description, enterprise, category});
     }
 
+    getProductsFilter(filter: String): Observable<any> {
+        const url = `${this.BASE_URL}/products-filter`;
+        return this.http.post(url, {filter: filter});
+    }
+
 }

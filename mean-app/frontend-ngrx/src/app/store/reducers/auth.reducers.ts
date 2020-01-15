@@ -25,6 +25,7 @@ export const initialState: AuthState = {
 export function reducer(state = initialState, action: All): AuthState {
   console.log(state);
   console.log('reducer')
+  console.log(action.type);
   switch (action.type) {
     
     case AuthActionTypes.LOGIN_SUCCESS: {
@@ -79,11 +80,24 @@ export function reducer(state = initialState, action: All): AuthState {
         errorMessage: 'That email is already in use.'
       };
     }
+    case AuthActionTypes.GET_USER_STORAGE_SUCCESS: {
+      console.log('hola');
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+      console.log(action.payload.user);
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload.user,
+        errorMessage: 'user retrieve from database',
+        token: action.payload.token
+      }
+    }
     case AuthActionTypes.LOGOUT: {
       return initialState;
     }
+
     default: {
-      // This retrieve info from database if is lost and there is
+      // This retrieve info from localStorage if is lost and there is
       if(state.user == null && localStorage.getItem('user') !== null){
         return {
           ...state,
@@ -91,7 +105,7 @@ export function reducer(state = initialState, action: All): AuthState {
           user: {
             email: localStorage.getItem('user')
           },
-          errorMessage: 'user retrieve from database',
+          errorMessage: 'user retrieve from localStorage',
           token: localStorage.getItem('token')
         }
       }
@@ -102,4 +116,4 @@ export function reducer(state = initialState, action: All): AuthState {
 
 export const getUserEntity = (state: AuthState) => state.user;
 
-export const getUserFromLocalstorage = (state: AuthState) => localStorage.getItem('user');
+//export const getUserFromLocalstorage = (state: AuthState) => localStorage.getItem('user');
