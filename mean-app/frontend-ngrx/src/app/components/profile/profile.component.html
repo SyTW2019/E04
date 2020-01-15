@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <body>
   <mat-toolbar color="primary">
   <mat-toolbar-row>
@@ -38,3 +39,45 @@
     </div>
   </mat-card>
 </body>
+=======
+<mat-toolbar class="navbar">
+  <button mat-raised-button [routerLink]="['/home']">Home</button>
+  <button mat-raised-button [routerLink]="['/profile']" >Profile</button>
+  <router-outlet></router-outlet>
+    <mat-form-field class="search-bar">
+      <input matInput type="text" placeholder="Search" [(ngModel)]="searchValue">
+      <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  <button mat-raised-button (click)="logOut()">Log out</button>
+</mat-toolbar>
+
+
+<mat-card class="register-form" style="width: 18rem;">
+  <div class="card-body">
+    <label class="hoverable" for="fileInput">
+      <img  [src]=" url ? url:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'">	  
+      <div class="hover-text">Choose file</div>
+      <div class="background"></div>
+    </label>
+    <input id="fileInput" type='file' (change)="onSelectFile($event)">
+    <button type="button" (click)="onUpload()">Guardar Foto</button>
+<button *ngIf="url" (click)="delete()" >delete</button>
+      <mat-card-title>
+        Tus Datos:
+    </mat-card-title>
+    <mat-card-content>
+      <mat-card-subtitle>
+        Email: {{user.email}}
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        Name: {{user.name}}
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        Nickname: {{user.nickname}}
+      </mat-card-subtitle>
+    </mat-card-content>
+  </div>
+</mat-card>
+>>>>>>> df568281e0f363590ec6893cbc955d1887c70e51

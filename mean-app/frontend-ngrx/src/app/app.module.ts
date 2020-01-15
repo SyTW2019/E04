@@ -1,5 +1,6 @@
+
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule ,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, CanActivate } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +31,9 @@ import {  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatInputModule, M
 import {MatListModule} from '@angular/material/list';
 import { HomeComponent } from './components/home/home.component';
 import { MatTabsModule } from '@angular/material';
+import { RestrictedComponent } from './restricted/restricted.component';
+import { UnrestrictedComponent } from './unrestricted/unrestricted.component';
+
 import { ProfileComponent } from './components/profile/profile.component';
 
 
@@ -45,6 +49,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     SignUp2Component,
     StatusComponent,
     HomeComponent,
+    RestrictedComponent,
+    
+    UnrestrictedComponent,
     ProfileComponent
   ],
   imports: [
@@ -67,7 +74,7 @@ import { ProfileComponent } from './components/profile/profile.component';
       { path: 'status', component: StatusComponent, canActivate: [AuthGuard] },
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-      { path: '', component: LandingComponent },
+      { path: 'land', component: LandingComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: '/' }
     ]),
     ReactiveFormsModule,
@@ -106,6 +113,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     },
     HttpClientModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

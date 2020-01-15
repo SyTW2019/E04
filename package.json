@@ -5,10 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "cd mean-app/frontend-ngrx && ng test",
     "test-headless": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "cd mean-app/frontend-ngrx && ng e2e",
     "ci": "npm run format:test && ng lint && ng test --configuration=test --browsers ChromeTravisCi --code-coverage && npm run e2e && npm run build:prod -- --deploy-url /angular-ngrx-material-starter/ --base-href /angular-ngrx-material-starter"
   },
   "private": true,
@@ -27,8 +27,6 @@
     "@ngrx/effects": "^8.5.2",
     "@ngrx/store": "^8.5.2",
     "bootstrap": "^4.4.0",
-    "lodash-es": "^4.17.15",
-    "ngrx-store-localstorage": "^8.0.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
