@@ -7,4 +7,5 @@ export class Enterprise {
     address?: string;
     enterprise?: string;
     cif?: string;
+    
   }

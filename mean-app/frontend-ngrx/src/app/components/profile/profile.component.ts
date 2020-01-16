@@ -8,6 +8,7 @@ import { AppState, getUser } from 'src/app/store/app.states';
 import { AuthEffects } from 'src/app/store/effects/auth.effects';
 
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -17,6 +18,7 @@ export class ProfileComponent implements OnInit {
   getState: Observable<any>;
   userObs: Observable<any>;
   user: Enterprise | User;
+  url = '';
 
   constructor(
     private effect : AuthEffects,
@@ -24,6 +26,7 @@ export class ProfileComponent implements OnInit {
   ) {
     
   }
+
 
   ngOnInit() {
     this.userObs = this.store.select(getUser);
@@ -34,5 +37,7 @@ export class ProfileComponent implements OnInit {
   logOut(): void {
     this.store.dispatch(new LogOut);
   }
+
+ 
 
 }

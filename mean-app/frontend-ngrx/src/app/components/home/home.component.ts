@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(new LogOut);
   }
   
+
   addProduct(): void {
     /*const payload = {
       name: this.name,

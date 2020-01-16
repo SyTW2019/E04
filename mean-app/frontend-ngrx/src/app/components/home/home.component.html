@@ -1,3 +1,4 @@
+<body>
 <mat-toolbar class="navbar">
     <button mat-raised-button [routerLink]="['/home']">Home</button>
     <button mat-raised-button (click)="getProfile()" >Profile</button>
@@ -10,9 +11,16 @@
       </mat-form-field>
       <button mat-raised-button (click)="logOut()">Log out</button>
 </mat-toolbar>
+
+
+ 
+
+
+
+
 <mat-card class="home-card">
   <div class="card-body">
-      <img mat-card-avatar src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">	  
+       
     <mat-card-title>
       Post your product
     </mat-card-title>
@@ -41,16 +49,21 @@
     </form>
   </div>
 </mat-card>
+
 <mat-list>
-  <mat-list-item *ngFor="let product of products | async">
+  <li *ngFor="let product of products | async">
     <mat-card class="home-card">
         <mat-card-title>
-          {{product.name}}
+          {{product.name}}  
         </mat-card-title>
-        <mat-card-subtitle>
-          {{product.description}}
-        </mat-card-subtitle>
+        <br>
+        <mat-card-content>	
+          <mat-card-subtitle>
+            {{product.description}}
+          </mat-card-subtitle>
+        </mat-card-content>
     </mat-card>
     <br>
-  </mat-list-item>
+  </li>
 </mat-list>
+</body>

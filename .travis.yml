@@ -1,0 +1,31 @@
+language: node_js
+node_js:
+- 13.1.0
+dist: trusty
+sudo: false
+cache:
+  directories:
+  - node_modules
+addons:
+  chrome: stable
+  firefox: latest
+  sonarcloud:
+    organization: "sytw2019"
+    token:
+       secure: "acp5CGm5F+ToJgYO7EIigmsZGOj1yLV09KDUvEXN7RgFFMHQXbIS7bqRFVxVMS1cvOPTjQdT0kRC4qFa2hBNMFJMqhw++pem1l/7+diDS0VfdJePafosif2lHX3MApNePIZBdMcb9agToWMha5FsCQKCEn7Z0c1zbbD3zX6S48p8IQldpXGy+ztpv9hc3R9kBFzu+OUUC7hc8HZsYvkLGHmWNB+n/u02WTVhDDrcR+Yc2EkZdIiMj/3g5AdKl6MiOGyoA5DyoP+/REJ0NuRfeH3lkkN7P8/UtZSYrhKB0J7uTqcY2fUum8rMpSaqsdKJ+DwNd+yN5Q/BgKGqiUxkLQ+dkq44/zif3Vm6Tba3JnyhgBp3asEL3SZr+81MGUNXtepvIDQye2PQv4PngJXQNgj3jJIn0NV8fWV1WSSfAMkgwu1L7n+7dsdMHEfK2fd0OZ9/TpM9brnEMW3dK7IxmdYIaAJkmc8zDDzLZ5t0fdbwFJrPbnmO62SkOvMQDzNtVXacFi2Cam5FzK5oxD8nOfhGmegQ2eFimiBZZdFLPk1BGf0SFlyJFzPQs+D1m/jt/DCbezkyjcpaf0TeKRGPzscAS0FETsxzgBvbXF+Vg9t2XqV+kOBpwWKnbaD3qqxZw1QTcEpzu76fi6ZgqVjch3HcML/G1qlZZO5ODz9qnuQ="
+before_install:
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+before_script:
+  - cd mean-app
+  - cd frontend-ngrx
+script:
+  - npm install codecov -g
+  - npm install
+  - npm audit fix
+
+
+
+  - cd ../../..
+  - sonar-scanner
