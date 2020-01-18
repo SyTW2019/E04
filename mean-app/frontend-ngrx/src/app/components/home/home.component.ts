@@ -17,7 +17,6 @@ import { AppState, getProducts, getUser } from '../../store/app.states';
 })
 export class HomeComponent implements OnInit {
 
-  // getState: Observable<any>;
   userObs: Observable<Enterprise | User>;
   user: Enterprise | User;
   products: Observable<[Product]>;
@@ -36,9 +35,7 @@ export class HomeComponent implements OnInit {
    this.userObs = this.store.select(getUser);
    this.userObs.subscribe(user => this.user = user);
    console.log('user');
-   // this.store.dispatch(new GetUserStorage());
    this.products = this.store.select(getProducts);
-   // console.log(this.products);
 
   }
 
@@ -48,17 +45,12 @@ export class HomeComponent implements OnInit {
   
 
   addProduct(): void {
-    /*const payload = {
-      name: this.name,
-      description: this.description,
-      enterprise: this.user
-    }*/
+
     let payload = new Product();
     payload.name = this.name;
     payload.description = this.description;
     payload.enterprise = this.user.email;
     payload.category =  "no category";
-    // console.log("component payload: " + payload.name + " " + payload.description + " " + payload.enterprise);
     this.store.dispatch(new AddProduct(payload));
     this.store.dispatch(new GetProducts());
     this.products = this.store.select(getProducts);
@@ -68,8 +60,6 @@ export class HomeComponent implements OnInit {
   getProductsFilter(): void {
     let payload = this.filter;
     this.store.dispatch(new GetProductFilter(payload));
-    // this.products = this.store.select(getProducts);
-    //console.log(this.products);
   }
 
   getProfile(): void {

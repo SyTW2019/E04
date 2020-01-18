@@ -34,20 +34,10 @@ import { MatTabsModule } from '@angular/material';
 
 import { ProfileComponent } from './components/profile/profile.component';
 
-
-
-
-
 @NgModule({
   declarations: [
-    AppComponent,
-    LogInComponent,
-    LandingComponent,
-    SignUpComponent,
-    SignUp2Component,
-    StatusComponent,
-    HomeComponent,
-    ProfileComponent
+    AppComponent, LogInComponent, LandingComponent, SignUpComponent,
+    SignUp2Component, StatusComponent, HomeComponent, ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -72,25 +62,9 @@ import { ProfileComponent } from './components/profile/profile.component';
       { path: 'land', component: LandingComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'land' }
     ]),
-    ReactiveFormsModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatTableModule,
-    MatDividerModule,
-    MatSnackBarModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    HttpClientModule,
-    MatMenuModule,
-    MatGridListModule,
-    MatTabsModule,
-    MatListModule
+    ReactiveFormsModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule,
+    MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule,
+    HttpClientModule, MatMenuModule, MatGridListModule, MatTabsModule, MatListModule
   ],
   providers: [
     AuthService,
@@ -108,7 +82,6 @@ import { ProfileComponent } from './components/profile/profile.component';
     },
     HttpClientModule
   ],
-  bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  bootstrap: [AppComponent], schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

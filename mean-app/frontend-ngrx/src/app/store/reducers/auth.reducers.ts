@@ -23,9 +23,6 @@ export const initialState: AuthState = {
 };
 
 export function reducer(state = initialState, action: All): AuthState {
-  console.log(state);
-  console.log('reducer')
-  console.log(action.type);
   switch (action.type) {
     
     case AuthActionTypes.LOGIN_SUCCESS: {
@@ -81,9 +78,6 @@ export function reducer(state = initialState, action: All): AuthState {
       };
     }
     case AuthActionTypes.GET_USER_STORAGE_SUCCESS: {
-      console.log('hola');
-      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-      console.log(action.payload.user);
       return {
         ...state,
         isAuthenticated: true,
@@ -116,4 +110,3 @@ export function reducer(state = initialState, action: All): AuthState {
 
 export const getUserEntity = (state: AuthState) => state.user;
 
-//export const getUserFromLocalstorage = (state: AuthState) => localStorage.getItem('user');

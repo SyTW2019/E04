@@ -5,4 +5,3 @@ export class Product {
     enterprise?: string;
     users?: [string];
 }
-  

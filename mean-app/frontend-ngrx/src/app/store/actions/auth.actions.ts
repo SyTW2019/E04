@@ -76,7 +76,6 @@ export class GetStatus implements Action {
 export class GetUserBd implements Action {
   readonly type = AuthActionTypes.GET_USER_STORAGE;
   constructor(public payload: any) {
-    console.log("Get User Storage entry")
   }
 }
 

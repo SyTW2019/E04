@@ -17,6 +17,32 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cors());
 
+router.get('/products', checkToken, (req, res) => {
+  //verify the JWT token generated for the user
+  jwt.verify(req.token, 'privatekey', (err, products) => {
+    if(err){
+        //If error send Forbidden (403)
+        console.log('ERROR: Could not connect to the protected route');
+        res.sendStatus(403);
+    } else {
+        //If token is successfully verified, we can send the autorized data 
+        mongooose.connect(url);
+        const connection = mongooose.connection;
+        Product.find((err, products) => {
+          if(err) {
+            console.log(err)
+          }else{
+            res.json({
+              message: 'products returned',
+              products
+            });
+          }
+        }
+      )
+    }
+  });
+})
+
 app.get('/ping', (req, res, next) => {
   res.status(200).json('pong!');
 });
@@ -192,7 +218,6 @@ router.route('/users').get((req, res) => {
 });
 
 router.route('/user').post((req, res) => {
-  console.log('Hola mundo!')
   //If token is successfully verified, we can send the autorized data 
   mongooose.connect(url);
   const connection = mongooose.connection;
@@ -212,31 +237,7 @@ router.route('/user').post((req, res) => {
 })
 
 
-router.get('/products', checkToken, (req, res) => {
-  //verify the JWT token generated for the user
-  jwt.verify(req.token, 'privatekey', (err, products) => {
-    if(err){
-        //If error send Forbidden (403)
-        console.log('ERROR: Could not connect to the protected route');
-        res.sendStatus(403);
-    } else {
-        //If token is successfully verified, we can send the autorized data 
-        mongooose.connect(url);
-        const connection = mongooose.connection;
-        Product.find((err, products) => {
-          if(err) {
-            console.log(err)
-          }else{
-            res.json({
-              message: 'products returned',
-              products
-            });
-          }
-        }
-      )
-    }
-  });
-})
+
 
 router.post('/products-filter', checkToken, (req, res) => {
   console.log("entra");
