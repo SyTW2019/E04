@@ -12,11 +12,11 @@ addons:
   sonarcloud:
     organization: "sytw2019"
     token:
-       secure: "acp5CGm5F+ToJgYO7EIigmsZGOj1yLV09KDUvEXN7RgFFMHQXbIS7bqRFVxVMS1cvOPTjQdT0kRC4qFa2hBNMFJMqhw++pem1l/7+diDS0VfdJePafosif2lHX3MApNePIZBdMcb9agToWMha5FsCQKCEn7Z0c1zbbD3zX6S48p8IQldpXGy+ztpv9hc3R9kBFzu+OUUC7hc8HZsYvkLGHmWNB+n/u02WTVhDDrcR+Yc2EkZdIiMj/3g5AdKl6MiOGyoA5DyoP+/REJ0NuRfeH3lkkN7P8/UtZSYrhKB0J7uTqcY2fUum8rMpSaqsdKJ+DwNd+yN5Q/BgKGqiUxkLQ+dkq44/zif3Vm6Tba3JnyhgBp3asEL3SZr+81MGUNXtepvIDQye2PQv4PngJXQNgj3jJIn0NV8fWV1WSSfAMkgwu1L7n+7dsdMHEfK2fd0OZ9/TpM9brnEMW3dK7IxmdYIaAJkmc8zDDzLZ5t0fdbwFJrPbnmO62SkOvMQDzNtVXacFi2Cam5FzK5oxD8nOfhGmegQ2eFimiBZZdFLPk1BGf0SFlyJFzPQs+D1m/jt/DCbezkyjcpaf0TeKRGPzscAS0FETsxzgBvbXF+Vg9t2XqV+kOBpwWKnbaD3qqxZw1QTcEpzu76fi6ZgqVjch3HcML/G1qlZZO5ODz9qnuQ="
+       secure: "ErFDBZfOMiwRkRP9DhUJQpdorDJCu2EfuKYap4VgWT8WWVHyZ29xySm6hDSUqDArGUxKzOc19HUSANlySoytErVvWXMsm5bSZu7ys3vxvNwu7LO5BfrwD6mZxbHUibjXzVAexk9uMg0XIJNc7zAcp/ecIG7edLGABkNCT7wHRCwT05W2udkvlwcDJjdEoRSMAit2lLVuTrgJ1KU2IBb1k9JdpRFpqBCjBPitYM4VKos3r20MLtAW10qUkKetuROL5COV6UC4VV35SvsYKFcLQMViN092WMvMh+22lNsaVHDixxovLmMnqGj9zxxaEPzkj7PX7RWolGTJKgHtIC79IcK/mss+RBS3fug9/a2tbRU8fpVipuavtrdubDHSq0KHJNiVNuLvr+JlmIJde7szBnsEDX/ykVHP3AoEvr4trtKza1/031BoNox/cVYu6bDaEv72uw3YRorHtaR0wvvcb0SJ3FwDh3XEgs8Wpt3a5DvC5y8+xpI5UehYudLCJNwAd77iuyAaBM9XvkAn1PmonzS7lFALWeeCktN01uAUlivDYrPl/ooq4ikLEsOQEfVvOZfOeUyhGzTB+OwIylC5NSzo2vQkMDh3Sv/JQL0cFUjOvotnvkRy8PqR4EJkTcwlb9Hjnn5Ufnh4t/YzIt0BPWAaZpPbq2LRc1SO6KKED4U="
 before_install:
-- export CHROME_BIN=chromium-browser
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 before_script:
   - cd mean-app
   - cd frontend-ngrx
