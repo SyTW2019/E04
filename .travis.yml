@@ -24,4 +24,5 @@ script:
   - npm install codecov -g
   - npm install
   - npm audit fix
+  - cd ../../..
   - sonar-scanner -Dproject.settings=./sonar-project.properties
