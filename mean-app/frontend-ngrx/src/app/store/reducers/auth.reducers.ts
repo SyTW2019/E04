@@ -2,7 +2,8 @@ import { User } from '../../models/user';
 import { AuthActionTypes, All } from '../actions/auth.actions';
 import { Enterprise } from 'src/app/models/enterprise';
 
-
+// @namespace authState
+// information from the state of the auth
 export interface AuthState {
   // is a user authenticated?
   isAuthenticated: boolean;
@@ -14,6 +15,7 @@ export interface AuthState {
   token: string | null;
 }
 
+// initialState when app is launched 
 export const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
@@ -22,9 +24,13 @@ export const initialState: AuthState = {
   token: null,
 };
 
+
+// @namespace authReducer
+// reducer of the different actions that are dispatched
 export function reducer(state = initialState, action: All): AuthState {
   switch (action.type) {
-    
+    // each option assing the information to the state
+    // from the action correspondent
     case AuthActionTypes.LOGIN_SUCCESS: {
       return {
         ...state,
@@ -89,7 +95,6 @@ export function reducer(state = initialState, action: All): AuthState {
     case AuthActionTypes.LOGOUT: {
       return initialState;
     }
-
     default: {
       // This retrieve info from localStorage if is lost and there is
       if(state.user == null && localStorage.getItem('user') !== null){

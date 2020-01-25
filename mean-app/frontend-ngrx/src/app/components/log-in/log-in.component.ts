@@ -7,7 +7,8 @@ import { AppState, selectAuthState } from '../../store/app.states';
 import { LogIn } from '../../store/actions/auth.actions';
 
 
-
+// @namespace login
+// This is the login page for enterprises and users
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
@@ -30,7 +31,12 @@ export class LogInComponent implements OnInit {
       this.errorMessage = state.errorMessage;
     });
   }
-
+  // @namespace submitLogin
+  // This function is dispatched when you click login
+  // @Params:
+  // local variables
+  // email: email of the user introduced
+  // password: password of the user introduced 
   onSubmit(): void {
     const payload = {
       email: this.user.email,

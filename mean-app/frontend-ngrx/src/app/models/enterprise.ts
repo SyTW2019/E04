@@ -1,3 +1,5 @@
+// @namespace enterpriseModel
+// Model of a enterprise of the aplication
 export class Enterprise {
     id?: string;
     email: string;

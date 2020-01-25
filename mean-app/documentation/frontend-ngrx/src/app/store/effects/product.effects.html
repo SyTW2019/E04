@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>product.effects.ts</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../../../../../docs/docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>product.effects.ts</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { Router } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/router'</span>;
+<span class="hljs-keyword">import</span> { Actions, Effect, ofType } <span class="hljs-keyword">from</span> <span class="hljs-string">'@ngrx/effects'</span>;
+<span class="hljs-keyword">import</span> { Store } <span class="hljs-keyword">from</span> <span class="hljs-string">'@ngrx/store'</span>;
+<span class="hljs-keyword">import</span> { Observable, of } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;
+<span class="hljs-keyword">import</span> { catchError, exhaustMap, filter, map, switchMap, withLatestFrom } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/operators'</span>;
+<span class="hljs-keyword">import</span> { ProductService } <span class="hljs-keyword">from</span> <span class="hljs-string">'../../services/product.service'</span>;
+<span class="hljs-keyword">import</span> { AddProduct, AddProductFailure, AddProductSuccess, GetProductFilter, GetProductsSuccess, ProductActionTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'../actions/products.actions'</span>;
+<span class="hljs-keyword">import</span> { AppState } <span class="hljs-keyword">from</span> <span class="hljs-string">'../app.states'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>@namespace productEffects
+effect dispatched when product actions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-meta">@Injectable</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> ProductEffects {
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params">
+        <span class="hljs-keyword">private</span> actions: Actions,
+        <span class="hljs-keyword">private</span> store: Store&lt;AppState&gt;,
+        <span class="hljs-keyword">private</span> productService: ProductService,
+        <span class="hljs-keyword">private</span> router: Router,
+    </span>) {}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>@namespace addProductEffect
+@effect used to add a product calling to product service</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-meta">@Effect</span>()
+    AddProduct: Observable&lt;<span class="hljs-built_in">any</span>&gt; = <span class="hljs-keyword">this</span>.actions.pipe(
+        ofType(ProductActionTypes.ADD_PRODUCT)).pipe(
+            map(<span class="hljs-function">(<span class="hljs-params">action: AddProduct</span>) =&gt;</span> action.payload)).pipe(
+                switchMap(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.productService.addProduct(payload).pipe(
+                        map(<span class="hljs-function">(<span class="hljs-params">product</span>) =&gt;</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AddProductSuccess({products: <span class="hljs-keyword">this</span>.productService.getProducts()});
+                })).pipe(catchError(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
+            <span class="hljs-keyword">return</span> of(<span class="hljs-keyword">new</span> AddProductFailure({ error: error}));
+        }));
+    }));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>@namespace getProductEffect
+@effect used to get all products calling to product service</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-meta">@Effect</span>()
+    GetProducts = <span class="hljs-keyword">this</span>.actions.pipe(
+        ofType(ProductActionTypes.GET_PRODUCTS),
+        withLatestFrom(),
+        filter(<span class="hljs-function">(<span class="hljs-params">[, loaded]</span>) =&gt;</span> !loaded),
+        exhaustMap(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-keyword">this</span>.productService.getProducts()
+        .pipe(
+            map(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> <span class="hljs-keyword">new</span> GetProductsSuccess(payload))
+        ))
+    )</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>@namespace getProductEffectFilter
+@effect used to get all products with filter calling to product service</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-meta">@Effect</span>()
+    GetProductsFilter = <span class="hljs-keyword">this</span>.actions.pipe(
+        ofType(ProductActionTypes.GET_PRODUCTS_FILTER)).pipe(
+            map(<span class="hljs-function">(<span class="hljs-params">action: GetProductFilter</span>) =&gt;</span> action.payload)).pipe(
+                switchMap(<span class="hljs-function"><span class="hljs-params">payload</span> =&gt;</span> {
+                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.productService.getProductsFilter(payload).pipe(
+                        map(<span class="hljs-function">(<span class="hljs-params">payload</span>) =&gt;</span> {
+                            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GetProductsSuccess(payload);
+                        }
+                    )
+                )
+            }
+        )
+    )
+
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

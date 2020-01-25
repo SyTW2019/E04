@@ -7,6 +7,8 @@ import { AppState, selectAuthState } from '../../store/app.states';
 
 
 
+// @namespace signUpEnterprise
+// page with the form to sign up as enterprise
 @Component({
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
@@ -31,6 +33,19 @@ export class SignUp2Component implements OnInit {
         });
     }
 
+    // @namespace submitSignUpEnterprise
+    // function to sign up a new enterprise with the values of the form
+    // @Params
+    // local variables from form
+    // email: email from the enterise in the form
+    // password: password from the enterprise in the form
+    // nickname: nicknmae from the enterprise in the form
+    // @Return
+    // if succes
+    // new token with the session
+    // redirection to home page
+    // if fail
+    // errorMessage
     onSubmit(): void {
         const payload = {
             email: this.user.email,

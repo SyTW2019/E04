@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
-
+// @namespace authActionTypes
+// Action types of the auth reducer
 export enum AuthActionTypes {
   LOGIN = '[Auth] Login',
   LOGIN_SUCCESS = '[Auth] Login Success',
@@ -18,6 +19,7 @@ export enum AuthActionTypes {
   ofType = "ofType"
 }
 
+// functions to dispatch all the actions
 export class LogIn implements Action {
   readonly type = AuthActionTypes.LOGIN;
   
@@ -85,6 +87,7 @@ export class GetUserBdSuccess implements Action {
   }
 }
 
+// Different types of actions dispatched
 export type All =
   | LogIn
   | LogInSuccess

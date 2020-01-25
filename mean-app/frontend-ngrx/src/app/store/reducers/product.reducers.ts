@@ -1,24 +1,30 @@
 import { Product } from '../../models/product';
 import { ProductActionTypes } from '../actions/products.actions';
 
+
+// @namespace productState
+// information from the state of products
 export interface ProductsState {
     products: [Product] | null
     selectedProduct: Product | null
     error: string | null
 };
 
+// initialState when app is launched 
 export const initialState: ProductsState = {
     products: null,
     selectedProduct: null,
     error: null
 };
 
-
+// @namespace productsReducer
+// reducer of the different actions that are dispatched
 export function reducer(state = initialState, action): ProductsState{
     console.log(state);
     
     switch (action.type) {
-
+        // each option assing the information to the state
+        // from the action correspondent
         case ProductActionTypes.GET_PRODUCTS_SUCCESS: {
             return {
                 ...state,

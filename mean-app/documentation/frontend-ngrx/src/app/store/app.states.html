@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>app.states.ts</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../../../../docs/docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>app.states.ts</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> { createFeatureSelector, createSelector, ActionReducerMap } <span class="hljs-keyword">from</span> <span class="hljs-string">'@ngrx/store'</span>;
+
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> auth <span class="hljs-keyword">from</span> <span class="hljs-string">'./reducers/auth.reducers'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> product <span class="hljs-keyword">from</span> <span class="hljs-string">'./reducers/product.reducers'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>@namespace AppState
+State of the application
+authState: state of the auth
+productState: state of the products</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> AppState {
+  authState: auth.AuthState;
+  productState: product.ProductsState;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>@namespace AppReducerMap
+map of the reducers of the application
+@var
+authState: reducer of aut
+productState: reducer of products</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> reducers: ActionReducerMap&lt;AppState&gt; = {
+  authState: auth.reducer,
+  productState: product.reducer
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>@namespace selector
+different selectors of the information of the spate</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getAppState = createFeatureSelector&lt;AppState&gt;(<span class="hljs-string">'appState'</span>);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> selectAuthToken = <span class="hljs-function">(<span class="hljs-params">state: auth.AuthState</span>) =&gt;</span> state.token;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> selectUser = <span class="hljs-function">(<span class="hljs-params">state: auth.AuthState</span>) =&gt;</span> state.user;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> selectProducts = <span class="hljs-function">(<span class="hljs-params">state: product.ProductsState</span>) =&gt;</span> state.products; 
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getProductsState = createSelector(
+  getAppState,
+  <span class="hljs-function">(<span class="hljs-params">state: AppState</span>) =&gt;</span> state.productState
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> selectAuthState = createSelector(
+  getAppState,
+  <span class="hljs-function">(<span class="hljs-params">state: AppState</span>) =&gt;</span> state.authState
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getProducts = createSelector(
+  getProductsState,
+  product.getProductsEntities
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getUser = createSelector(
+  selectAuthState,
+  auth.getUserEntity
+)</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

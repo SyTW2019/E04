@@ -8,7 +8,8 @@ import { AppState, getUser } from 'src/app/store/app.states';
 import { AuthEffects } from 'src/app/store/effects/auth.effects';
 
 
-
+// @namespace profile
+// page where user can see his profile
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -27,13 +28,14 @@ export class ProfileComponent implements OnInit {
     
   }
 
-
   ngOnInit() {
     this.userObs = this.store.select(getUser);
     this.userObs.subscribe(user =>{this.user = user.user});
     this.store.dispatch(new GetUserBd(this.user.email));
   }
 
+  // @namespace logOut
+  // Function for log out from the aplication
   logOut(): void {
     this.store.dispatch(new LogOut);
   }

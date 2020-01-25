@@ -6,7 +6,8 @@ import { User } from '../../models/user';
 import { AppState, selectAuthState } from '../../store/app.states';
 import { SignUp } from '../../store/actions/auth.actions';
 
-
+// @namespace signUpUser
+// page with the form to sign up as user
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -30,6 +31,19 @@ export class SignUpComponent implements OnInit {
     });
   }
 
+  // @namespace submitSignUpUser
+  // function to sign up a new user with the values of the form
+  // @Params
+  // local variables from form
+  // email: email from the user in the form
+  // password: password from the user in the form
+  // nickname: nicknmae from the user in the form
+  // @Return
+  // if succes
+  // new token with the session
+  // redirection to home page
+  // if fail
+  // errorMessage
   onSubmit(): void {
     const payload = {
       email: this.user.email,

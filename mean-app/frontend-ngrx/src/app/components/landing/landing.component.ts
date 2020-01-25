@@ -7,7 +7,8 @@ import { LogOut } from '../../store/actions/auth.actions';
 
 
 
-
+// @namespace landingComponent
+// First page that apper when you run the aplication
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -38,6 +39,8 @@ export class LandingComponent implements OnInit {
     });
   }
 
+  // @namespace logOut
+  // Function for log out from the aplication
   logOut(): void {
     this.store.dispatch(new LogOut);
   }

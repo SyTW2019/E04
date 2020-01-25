@@ -10,7 +10,8 @@ import { AppState } from '../app.states';
 
 
 
-
+// @namespace productEffects
+// effect dispatched when product actions
 @Injectable()
 export class ProductEffects {
     constructor(
@@ -19,7 +20,9 @@ export class ProductEffects {
         private productService: ProductService,
         private router: Router,
     ) {}
-
+    
+    // @namespace addProductEffect
+    // @effect used to add a product calling to product service
     @Effect()
     AddProduct: Observable<any> = this.actions.pipe(
         ofType(ProductActionTypes.ADD_PRODUCT)).pipe(
@@ -34,7 +37,8 @@ export class ProductEffects {
     }));
 
 
-
+    // @namespace getProductEffect
+    // @effect used to get all products calling to product service
     @Effect()
     GetProducts = this.actions.pipe(
         ofType(ProductActionTypes.GET_PRODUCTS),
@@ -46,6 +50,8 @@ export class ProductEffects {
         ))
     )
 
+    // @namespace getProductEffectFilter
+    // @effect used to get all products with filter calling to product service
     @Effect()
     GetProductsFilter = this.actions.pipe(
         ofType(ProductActionTypes.GET_PRODUCTS_FILTER)).pipe(
@@ -60,19 +66,5 @@ export class ProductEffects {
             }
         )
     )
-    
-        
-    /*
-      @Effect()
-      GetProductsFilter = this.actions.pipe(
-          ofType(ProductActionTypes.GET_PRODUCTS_FILTER),
-          withLatestFrom(),
-          filter(([, loaded]) => !loaded),
-          exhaustMap(() => this.productService.getProductsFilter(acti)
-          .pipe(
-              map(payload => new GetProductsSuccess(payload))
-          ))
-      )     
-      */   
 
 }
