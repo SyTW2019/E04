@@ -23,6 +23,20 @@ app.get('/ping', (req, res, next) => {
   res.status(200).json('pong!');
 });
 
+//
+//     @namespace register
+//     This function register an user of type influencer.
+//     @Params:
+//     user: object of type user, have next attributes
+//     user.email: email of user you want to register
+//     user.password: password of user you want to register
+//     @Return:
+//     json with this attributes:
+//     status(code): 422 errror
+//     status(string): status of the answer success, error..
+//     errorMessage: if it has an error you can see the type here
+//     user: if it is success it returns an user
+//
 router.route('/register').post((req, res, next) => {
   mongooose.connect(url);
   const connection = mongooose.connection;
@@ -58,7 +72,23 @@ router.route('/register').post((req, res, next) => {
   })
 })
 
-
+//     @namespace login
+//     This function check if the user received is correct, if it is correct
+//     it generates a jwt tocken of authentification for the session
+//     @Params:
+//     email: email of the user
+//     password: password of the user without encript
+//     @Return:
+//     json with the attributes:
+//     if success
+//       status: success
+//       type: type of the user (User | Enterprise)
+//       token: token generated
+//     if error
+//       code of error
+//       status: error
+//       errorMessage
+// 
 router.route('/login').post((req, res, next) => {
   mongooose.connect(url);
   const connection = mongooose.connection;
@@ -75,7 +105,6 @@ router.route('/login').post((req, res, next) => {
     if (!user) {
       Enterprise.findOne({ email: email}, (err, enterprise) => {
         if(email === enterprise.email && password === enterprise.password) {
-          //if user log in success, generate a JWT token for the user with a secret key
         jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
           if (err) { 
             res.status(422).json({
@@ -95,9 +124,7 @@ router.route('/login').post((req, res, next) => {
         }
       })
     } else {
-      //checking to make sure the user entered the correct username/password combo
       if (email === user.email && password === user.password) {
-        //if user log in success, generate a JWT token for the user with a secret key
         jwt.sign({ user }, 'privatekey', { expiresIn: '1h' }, (err, token) => {
           if (err) { 
             res.status(422).json({
@@ -124,6 +151,19 @@ router.route('/login').post((req, res, next) => {
   })
 });
 
+//     @namespace register-enterprise
+//     This function register an user of type enterprise.
+//     @Params:
+//     user: object of type enterprise, have next attributes
+//     user.email: email of user you want to register
+//     user.password: password of user you want to register
+//     @Return:
+//     json with this attributes:
+//     status(code): 422 errror
+//     status(string): status of the answer success, error..
+//     errorMessage: if it has an error you can see the type here
+//     user: if it is success it returns an user
+//
 router.route('/register-enterprise').post((req, res, next) => {
   mongooose.connect(url);
   const connection = mongooose.connection;
@@ -165,8 +205,16 @@ router.route('/register-enterprise').post((req, res, next) => {
   });
 });
 
-
-//Check to make sure header is not undefined, if so, return Forbidden (403)
+//   @namespace checkToken
+//   This function Check to make sure header is not undefined, if so, return Forbidden (403)
+//   @Params: 
+//   req: the request
+//   @Return: 
+//     if success 
+//     return token
+//     else
+//     status(403)
+//
 const checkToken = (req, res, next) => {
   const header = req.headers['authorization'];
 
@@ -177,11 +225,15 @@ const checkToken = (req, res, next) => {
       req.token = token;
       next();
   } else {
-      //If header is undefined return Forbidden (403)
       res.sendStatus(403)
   }
 }
 
+//   @namespace users
+//   This runctions return all users from bbdd
+//   @Return:
+//   json with all users.
+//
 router.route('/users').get((req, res) => {
   mongooose.connect(url);
   const connection = mongooose.connection;
@@ -193,8 +245,15 @@ router.route('/users').get((req, res) => {
   });
 });
 
+
+//  @namespace user
+//   This function return the complete user object from bbdd
+//   @Params:
+//   email: email of the user
+//   @Return: 
+//   user: the complete user from the bbdd
+//
 router.route('/user').post((req, res) => {
-  //If token is successfully verified, we can send the autorized data 
   mongooose.connect(url);
   const connection = mongooose.connection;
   let email = req.body.email;
@@ -212,15 +271,23 @@ router.route('/user').post((req, res) => {
   })
 })
 
+//  @namespace products
+//  This function return all the products from bbdd
+//  Check that the jwt token is correct 
+//  @Params:
+//  req.token: we check the token in order to return the products
+//  @Return:
+//  if token is correct:
+//  products: all the products from bbdd
+//  if fail:
+//  status(403): direction protected 
+// 
 router.get('/products', checkToken, (req, res) => {
-  //verify the JWT token generated for the user
   jwt.verify(req.token, 'privatekey', (err, products) => {
     if(err){
-        //If error send Forbidden (403)
         console.log('ERROR: Could not connect to the protected route');
         res.sendStatus(403);
     } else {
-        //If token is successfully verified, we can send the autorized data 
         mongooose.connect(url);
         const connection = mongooose.connection;
         Product.find((err, products) => {
@@ -240,13 +307,21 @@ router.get('/products', checkToken, (req, res) => {
 
 
 
-
+//  @namespace products-filter
+//  This function return all the products from bbdd with the filter
+//  Check that the jwt token is correct 
+//  @Params:
+//  req.token: we check the token in order to return the products
+//  req.filter: string that is contained in the products
+//  @Return:
+//  if token is correct:
+//  products: all the products from bbdd with the filter
+//  if fail:
+//  status(403): direction protected 
+// 
 router.post('/products-filter', checkToken, (req, res) => {
-  console.log("entra");
-  // verify the JWT token generated for the user
   jwt.verify(req.token, 'privatekey', (err, ) =>{
     if(err){
-      //If error send Forbidden (403)
       console.log('ERROR: Could not connect to the protected route');
       res.sendStatus(403);
     } else {
@@ -274,17 +349,16 @@ router.post('/products-filter', checkToken, (req, res) => {
   })
 })
 
+//   @namespace add-product
+//   This function add a product to the bbdd
+//   @Params:
+//   product: the product that will be aded
+//   @Return:
+//   if error:
+//   status(400)
+//
 router.route('/add-product').post((req, res, next) => {
   console.log(req.body);
-  /*jwt.verify(req.token, 'privatekey', (err, res) => {
-    if(err){
-      //If error send Forbidden (403)
-      console.log('ERROR: Could not connect to the protected route');
-      res.sendStatus(403);
-    } else {
-      */
-      mongooose.connect(url);
-      const connection = mongooose.connection;
       let product = new Product(req.body);
       console.log(product);
       Product.findOne({name: product.name}, (err, auxProduct) => {
@@ -298,14 +372,20 @@ router.route('/add-product').post((req, res, next) => {
           res.status(400).send('Product code exist yet');
         }
       })
-    //}
   })
-//})
 
+//
+//   This function add a like to a product, is for a future feature
+//   @Params:
+//   Product: the product that is liked
+//   liker: the person who gives like
+//   @Return:
+//   if error
+//   status(400)
+//
 router.route('/like-product').post((req, res, next) => {
   jwt.verify(req.token, 'privatekey', (err, res) => {
     if(err){
-      //If error send Forbidden (403)
       console.log('ERROR: Could not connect to the protected route');
       res.sendStatus(403);
     } else {
@@ -332,10 +412,14 @@ router.route('/like-product').post((req, res, next) => {
   })
 })
 
+//   @namespace edit-product
+//   This function allow the user to edit his product
+//   No complete
+//   // TODO
+//
 router.route('/edit-product').post((req, res, next) => {
   jwt.verify(req.token, 'privatekey', (err, res) => {
     if(err) {
-      //If error send Forbidden (403)
       console.log('ERROR: Could not connect to the protected route');
       res.sendStatus(403);
     } else {
